@@ -7,10 +7,10 @@ import java.util.HashMap;
 
 
 public class TaskManager {
-    static int id = 0;
-    static HashMap<Integer, Task> taskHashMap = new HashMap<>();
-    static HashMap<Integer, Epic> epicHashMap = new HashMap<>();
-    static HashMap<Integer, SubTask> subTaskHashMap = new HashMap<>();
+    private static int id = 0;
+    private static HashMap<Integer, Task> taskHashMap = new HashMap<>();
+    private static HashMap<Integer, Epic> epicHashMap = new HashMap<>();
+    private static HashMap<Integer, SubTask> subTaskHashMap = new HashMap<>();
 
     public void addTask(Task task) {
         task.setId(id++);
@@ -80,6 +80,7 @@ public class TaskManager {
         Epic epic = epicHashMap.get(subTask.getEpicId());
         epic.removeSubTask(subTask.getId());
         subTaskHashMap.remove(subTask.getId());
+        updateEpicStatus(epic);
     }
 
     public Task getTaskById(int taskId) {
@@ -101,6 +102,7 @@ public class TaskManager {
 
     public void epicUpdate(Epic epic) {
         epicHashMap.replace(epic.getId(), epic);
+        updateEpicStatus(epic);
     }
 
     public void subTaskUpdate(SubTask subTask) {
