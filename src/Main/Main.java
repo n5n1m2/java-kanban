@@ -6,70 +6,70 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TaskManager taskManager = new TaskManager();
+        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
 
 
 
-    taskManager.addTask(new Task(TaskStatus.NEW, "Задача 1"));
-    taskManager.addTask(new Task(TaskStatus.NEW, "Задача 2"));
+    inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, "Задача 1"));
+    inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, "Задача 2"));
 
-    taskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
-    taskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 2"));
+    inMemoryTaskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
+    inMemoryTaskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 2"));
 
-    taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 1", taskManager.getAllEpic().get(0).getId()));
-        taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 2", taskManager.getAllEpic().get(1).getId()));
-        taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 3", taskManager.getAllEpic().get(1).getId()));
+    inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 1", inMemoryTaskManager.getAllEpic().get(0).getId()));
+        inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 2", inMemoryTaskManager.getAllEpic().get(1).getId()));
+        inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 3", inMemoryTaskManager.getAllEpic().get(1).getId()));
 
 
-        System.out.println(taskManager.getAllTask());
-        System.out.println(taskManager.getAllEpic());
-        System.out.println(taskManager.getAllSubTask());
-        System.out.println(taskManager.getTaskById(1));
-        System.out.println(taskManager.getEpicById(3));
-        System.out.println(taskManager.getSubtaskById(6));
-
-        System.out.println("****************************************" + "\n");
-
-        taskManager.subTaskUpdate(new SubTask(4, "Подзадача 1",TaskStatus.DONE, 2 ));
-        taskManager.subTaskUpdate(new SubTask(5, "Подзадача 2", TaskStatus.DONE, taskManager.getAllEpic().get(1).getId()));
-
-        System.out.println(taskManager.getAllTask());
-        System.out.println(taskManager.getAllEpic());
-        System.out.println(taskManager.getAllSubTask());
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getAllEpic());
+        System.out.println(inMemoryTaskManager.getAllSubTask());
+        System.out.println(inMemoryTaskManager.getTaskById(1));
+        System.out.println(inMemoryTaskManager.getEpicById(3));
+        System.out.println(inMemoryTaskManager.getSubtaskById(6));
 
         System.out.println("****************************************" + "\n");
 
-        taskManager.subTaskUpdate(new SubTask(6, "Подзадача 3", TaskStatus.DONE, taskManager.getAllEpic().get(1).getId()));
+        inMemoryTaskManager.subTaskUpdate(new SubTask(4, "Подзадача 1",TaskStatus.DONE, 2 ));
+        inMemoryTaskManager.subTaskUpdate(new SubTask(5, "Подзадача 2", TaskStatus.DONE, inMemoryTaskManager.getAllEpic().get(1).getId()));
 
-        System.out.println(taskManager.getAllTask());
-        System.out.println(taskManager.getAllEpic());
-        System.out.println(taskManager.getAllSubTask());
-
-        System.out.println("****************************************" + "\n");
-
-        taskManager.subTaskUpdate(new SubTask(6, "Подзадача 3", TaskStatus.IN_PROGRESS, taskManager.getAllEpic().get(1).getId()));
-
-        System.out.println(taskManager.getAllTask());
-        System.out.println(taskManager.getAllEpic());
-        System.out.println(taskManager.getAllSubTask());
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getAllEpic());
+        System.out.println(inMemoryTaskManager.getAllSubTask());
 
         System.out.println("****************************************" + "\n");
 
-        taskManager.deleteEpicById(2);
-        taskManager.removeAllSubTask();
-        taskManager.removeAllTask();
+        inMemoryTaskManager.subTaskUpdate(new SubTask(6, "Подзадача 3", TaskStatus.DONE, inMemoryTaskManager.getAllEpic().get(1).getId()));
 
-        System.out.println(taskManager.getAllTask());
-        System.out.println(taskManager.getAllEpic());
-        System.out.println(taskManager.getAllSubTask());
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getAllEpic());
+        System.out.println(inMemoryTaskManager.getAllSubTask());
 
         System.out.println("****************************************" + "\n");
 
-        taskManager.removeAllEpic();
+        inMemoryTaskManager.subTaskUpdate(new SubTask(6, "Подзадача 3", TaskStatus.IN_PROGRESS, inMemoryTaskManager.getAllEpic().get(1).getId()));
 
-        System.out.println(taskManager.getAllTask());
-        System.out.println(taskManager.getAllEpic());
-        System.out.println(taskManager.getAllSubTask());
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getAllEpic());
+        System.out.println(inMemoryTaskManager.getAllSubTask());
+
+        System.out.println("****************************************" + "\n");
+
+        inMemoryTaskManager.deleteEpicById(2);
+        inMemoryTaskManager.removeAllSubTask();
+        inMemoryTaskManager.removeAllTask();
+
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getAllEpic());
+        System.out.println(inMemoryTaskManager.getAllSubTask());
+
+        System.out.println("****************************************" + "\n");
+
+        inMemoryTaskManager.removeAllEpic();
+
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getAllEpic());
+        System.out.println(inMemoryTaskManager.getAllSubTask());
 
 
 
