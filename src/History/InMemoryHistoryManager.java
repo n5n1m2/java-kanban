@@ -2,22 +2,30 @@ package History;
 
 import Task.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InMemoryHistoryManager implements HistoryManager {
 
     private  int counter = 0;
     private  int historySize = 10;
 
-    private  Task[] history = new Task[historySize];
+    private  List<Task> history = new ArrayList<>();
 
-    @Override
-    public  void add(Task task) {
-        history[counter] = task;
-        counter = (counter + 1) % historySize;
-
+   public InMemoryHistoryManager(){
+        for (int i = 0; i < historySize; i++) {
+            history.add(null);
+        }
     }
 
     @Override
-    public Task[] getHistory() {
+    public  void add(Task task) {
+            history.set(counter, task);
+            counter = (counter + 1) % historySize;
+    }
+
+    @Override
+    public List<Task> getHistory() {
         return history;
     }
 }

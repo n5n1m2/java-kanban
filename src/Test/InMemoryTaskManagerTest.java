@@ -23,7 +23,7 @@ class InMemoryTaskManagerTest {
         taskManager.addTask(genId);
 
         assertEquals(2, taskManager.getAllTask().size(), "Размер списка меньше, чем кол-во задач.");
-        // После отправки в менеджере задачам задается новый сгенерированный айди, даже если ранее айди уже был задан.
+
 
         assertNotNull(taskManager.getTaskById(0), "Не найдена задача с айди 1");
         assertNotNull(taskManager.getTaskById(1), "Не найдена задача с айди 2");
@@ -52,9 +52,7 @@ class InMemoryTaskManagerTest {
         assertEquals(1, taskManager.getEpicById(1).getSubTaskCount(), "В эпике нет подзадач");
     }
 
-    // Со следующим заданием не совсем понял реализацию. Если требуется передать эпик как объект в метод для добавления сабтаска,
-    // то выходит, что теперь для методов требуется добавить обработку исключений? Через try-catch?
-    // Оставил вариант с добавлением сабтаска c айди эпика.
+
 
     // проверьте, что объект Epic нельзя добавить в самого себя в виде подзадачи;
     @Test

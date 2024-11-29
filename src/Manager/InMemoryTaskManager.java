@@ -6,6 +6,7 @@ import Task.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class InMemoryTaskManager implements TaskManager {
@@ -172,7 +173,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public Task[] getHistory(){
+    public List<Task> getHistory(){
         return historyManager.getHistory();
     }
 }

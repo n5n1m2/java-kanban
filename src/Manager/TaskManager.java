@@ -3,6 +3,7 @@ package Manager;
 import Task.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
     void addTask(Task task);
@@ -45,7 +46,7 @@ public interface TaskManager {
 
     void updateEpicStatus(Epic epic);
 
-    Task[] getHistory();
+    List<Task> getHistory();
 
 
 }
