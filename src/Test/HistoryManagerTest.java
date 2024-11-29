@@ -14,11 +14,13 @@ class HistoryManagerTest {
         Task task = new Task(TaskStatus.NEW, "Имя");
         taskManager.addTask(task);
         taskManager.getTaskById(0);
-        Task task1 = new Task(TaskStatus.NEW, "Имя 1");
+        Task task1 = new Task(0,"Имя 1", TaskStatus.NEW);
         taskManager.taskUpdate(task1);
         taskManager.getTaskById(0);
 
+
         List<Task> tasks = taskManager.getHistory();
-        assertEquals(task, tasks.get(1));
+
+        assertEquals(task, tasks.get(0));
     }
 }

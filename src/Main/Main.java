@@ -1,4 +1,5 @@
 package Main;
+
 import Manager.*;
 import Task.*;
 
@@ -9,14 +10,13 @@ public class Main {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
 
 
+        inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, "Задача 1"));
+        inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, "Задача 2"));
 
-    inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, "Задача 1"));
-    inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, "Задача 2"));
+        inMemoryTaskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
+        inMemoryTaskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 2"));
 
-    inMemoryTaskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
-    inMemoryTaskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 2"));
-
-    inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 1", inMemoryTaskManager.getAllEpic().get(0).getId()));
+        inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 1", inMemoryTaskManager.getAllEpic().get(0).getId()));
         inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 2", inMemoryTaskManager.getAllEpic().get(1).getId()));
         inMemoryTaskManager.addSubTask(new SubTask(TaskStatus.NEW, "Подзадача 3", inMemoryTaskManager.getAllEpic().get(1).getId()));
 
@@ -30,7 +30,7 @@ public class Main {
 
         System.out.println("****************************************" + "\n");
 
-        inMemoryTaskManager.subTaskUpdate(new SubTask(4, "Подзадача 1",TaskStatus.DONE, 2 ));
+        inMemoryTaskManager.subTaskUpdate(new SubTask(4, "Подзадача 1", TaskStatus.DONE, 2));
         inMemoryTaskManager.subTaskUpdate(new SubTask(5, "Подзадача 2", TaskStatus.DONE, inMemoryTaskManager.getAllEpic().get(1).getId()));
 
         System.out.println(inMemoryTaskManager.getAllTask());
@@ -71,9 +71,16 @@ public class Main {
         System.out.println(inMemoryTaskManager.getAllEpic());
         System.out.println(inMemoryTaskManager.getAllSubTask());
 
+        System.out.println("*" + inMemoryTaskManager.getHistory());
 
+        for (int i = 0; i <= 15; i++) {
+            String name = "name" + i;
+            inMemoryTaskManager.addTask(new Task(TaskStatus.NEW, name));
+            inMemoryTaskManager.getTaskById(7+i);
 
-
+        }
+        System.out.println(inMemoryTaskManager.getAllTask());
+        System.out.println(inMemoryTaskManager.getHistory());
 
 
     }

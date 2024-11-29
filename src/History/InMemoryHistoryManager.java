@@ -7,21 +7,22 @@ import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private  int counter = 0;
-    private  int historySize = 10;
 
-    private  List<Task> history = new ArrayList<>();
+    private int historySize = 10;
 
-   public InMemoryHistoryManager(){
-        for (int i = 0; i < historySize; i++) {
-            history.add(null);
-        }
-    }
+    private List<Task> history = new ArrayList<>();
+
 
     @Override
-    public  void add(Task task) {
-            history.set(counter, task);
-            counter = (counter + 1) % historySize;
+    public void add(Task task) {
+        if (history.size() > historySize) {
+            history.removeFirst();
+            history.add(task);
+
+        } else {
+            history.add(task);
+        }
+
     }
 
     @Override
