@@ -1,7 +1,7 @@
-package History;
+package history;
 
-import History.SubClass.HistoryManagerLinkedList;
-import Task.*;
+import history.subclass.HistoryManagerLinkedList;
+import task.*;
 
 import java.util.List;
 

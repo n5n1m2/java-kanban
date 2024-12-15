@@ -1,5 +1,5 @@
-import Manager.*;
-import Task.*;
+import manager.*;
+import task.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

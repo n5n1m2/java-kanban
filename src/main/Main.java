@@ -1,7 +1,7 @@
-package Main;
+package main;
 
-import Manager.*;
-import Task.*;
+import manager.*;
+import task.*;
 
 import java.util.Random;
 
