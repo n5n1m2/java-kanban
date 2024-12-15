@@ -1,32 +1,36 @@
 package History;
 
+import History.SubClass.HistoryManagerLinkedList;
 import Task.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-
-    private int historySize = 10;
-
-    private List<Task> history = new ArrayList<>();
+    private HistoryManagerLinkedList<Task> history = new HistoryManagerLinkedList<>();
 
 
     @Override
     public void add(Task task) {
-        if (history.size() > historySize) {
-            history.removeFirst();
-            history.add(task);
-
+        if (task == null) {
+            return;
+        }
+        if (history.contain(task.getId())) {
+            history.removeById(task.getId());
+            history.addLast(task, task.getId());
         } else {
-            history.add(task);
+            history.addLast(task, task.getId());
         }
 
     }
 
     @Override
     public List<Task> getHistory() {
-        return history;
+        return history.getTasks();
+    }
+
+    @Override
+    public void remove(int id) {
+        history.removeById(id);
     }
 }

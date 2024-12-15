@@ -13,7 +13,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void testTaskIdConflict(){ //Проверка, что задачи с заданным id и сгенерированным id не конфликтуют внутри менеджера;
+    public void testTaskIdConflict(){
 
 
         Task newTestTask = new Task(15, "Имя", TaskStatus.NEW);
@@ -52,9 +52,6 @@ class InMemoryTaskManagerTest {
         assertEquals(1, taskManager.getEpicById(1).getSubTaskCount(), "В эпике нет подзадач");
     }
 
-
-
-    // проверьте, что объект Epic нельзя добавить в самого себя в виде подзадачи;
     @Test
     public void addEpicAsSubTask(){
         Epic epic = new Epic(TaskStatus.NEW, "Эпик");
@@ -65,7 +62,7 @@ class InMemoryTaskManagerTest {
         assertNotEquals(0, taskManager.getSubtaskById(1).getSubTaskId(), "Айди эпика и сабтаски равны");
 
     }
-    //проверьте, что объект Subtask нельзя сделать своим же эпиком;
+
     @Test
     public void AddSubTaskAsEpic(){
         SubTask subTask = new SubTask(0, "Имя", TaskStatus.NEW, 0);
@@ -74,13 +71,9 @@ class InMemoryTaskManagerTest {
 
     }
 
-    // проверьте, что наследники класса Task равны друг другу, если равен их id;
-    // проверьте, что экземпляры класса Task равны друг другу, если равен их id;
     @Test
     public void equality(){
         TaskManager taskManager1 = Managers.getDefault();
-
-
 
         Epic epic = new Epic(TaskStatus.NEW, "Эпик");
         Task task = new Task(TaskStatus.NEW, "Имя");
@@ -102,5 +95,18 @@ class InMemoryTaskManagerTest {
 
         taskManager.addTask(task1);
         assertNotEquals(taskManager.getTaskById(1), taskManager.getTaskById(4), "Таски с разными айди равны");
+    }
+
+    //Внутри эпиков не должно оставаться неактуальных id подзадач.
+    @Test
+    public void EpicSubTaskIdSavingTest(){
+        taskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
+        taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 3", 0));
+        taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 2", 0));
+        taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 1", 0));
+        taskManager.deleteSubtaskById(1);
+        taskManager.deleteSubtaskById(2);
+         System.out.println(taskManager.getEpicById(0).getSubTaskId());
+         assertEquals(1, taskManager.getEpicById(0).getSubTaskId().size(), "эпик сохранил лишний Id");
     }
 }

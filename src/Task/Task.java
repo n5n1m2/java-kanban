@@ -30,6 +30,10 @@ public class Task {
         return status;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "Task{" +

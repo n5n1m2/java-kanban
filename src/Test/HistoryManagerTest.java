@@ -1,26 +1,57 @@
 import Manager.Managers;
 import Manager.TaskManager;
 import Task.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class HistoryManagerTest {
+    TaskManager taskManager;
+    String name;
+
+    @BeforeEach
+    public void h() {
+        taskManager = Managers.getDefault();
+    }
+
+
     @Test
-    public void HistoryManagerTest(){
-        TaskManager taskManager = Managers.getDefault();
-        Task task = new Task(TaskStatus.NEW, "Имя");
-        taskManager.addTask(task);
-        taskManager.getTaskById(0);
-        Task task1 = new Task(0,"Имя 1", TaskStatus.NEW);
-        taskManager.taskUpdate(task1);
-        taskManager.getTaskById(0);
+    public void HistoryManagerSizeTest() {
 
 
+        int i;
+        for (i = 0; i < 500; i++) {
+            if (i % 5 == 0 && i > 0) {
+                name = "Эпик " + i;
+                Epic epic = new Epic(TaskStatus.NEW, name);
+                taskManager.addEpic(epic);
+                taskManager.getEpicById(i);
+            } else {
+                name = "Таск " + i;
+                Task task = new Task(TaskStatus.NEW, name);
+                taskManager.addTask(task);
+                taskManager.getTaskById(i);
+            }
+        }
         List<Task> tasks = taskManager.getHistory();
+        assertEquals(i, tasks.size(), "Не совпадают размеры. Вызвано " + i + " элементов, получено " + tasks.size() + " элементов.");
+    }
 
-        assertEquals(task, tasks.get(0));
+    @Test
+    public void HistoryManagerAddAndRemoveTest() {
+        Task task = new Task(TaskStatus.NEW, "1");
+        taskManager.addTask(task);
+         task = new Task(TaskStatus.NEW, "1");
+        taskManager.getTaskById(0);
+        taskManager.getTaskById(0);
+        taskManager.getTaskById(0);
+        assertEquals(1, taskManager.getHistory().size(), "Не совпадает размер ожидаемого списка. Получено " + taskManager.getHistory().size() + " элементов, ожидается 1.");
+        taskManager.taskUpdate(new Task(0, "Имя", TaskStatus.NEW));
+        taskManager.getTaskById(0);
+        assertEquals("Имя", taskManager.getHistory().getFirst().getName(), "Не совпадают имена объектов");
     }
 }
