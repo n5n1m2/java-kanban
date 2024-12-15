@@ -40,7 +40,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void TasksAdd() { // Проверка, что InMemoryTaskManager действительно добавляет задачи разного типа и может найти их по id;
+    public void tasksAdd() { // Проверка, что InMemoryTaskManager действительно добавляет задачи разного типа и может найти их по id;
         Task task = new Task(TaskStatus.NEW, "Имя");
         Epic epic = new Epic(TaskStatus.NEW, "Эпик");
         SubTask subTask = new SubTask(TaskStatus.NEW, "СабТаск", 1);
@@ -66,7 +66,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void AddSubTaskAsEpic() {
+    public void addSubTaskAsEpic() {
         SubTask subTask = new SubTask(0, "Имя", TaskStatus.NEW, 0);
         taskManager.addSubTask(subTask);
         assertNull(taskManager.getSubtaskById(0));
@@ -101,7 +101,7 @@ class InMemoryTaskManagerTest {
 
     //Внутри эпиков не должно оставаться неактуальных id подзадач.
     @Test
-    public void EpicSubTaskIdSavingTest() {
+    public void epicSubTaskIdSavingTest() {
         taskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
         taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 3", 0));
         taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 2", 0));
