@@ -1,6 +1,6 @@
 package task;
 
-public class SubTask extends Epic{
+public class SubTask extends Epic {
     protected int epicId;
 
     public SubTask(TaskStatus status, String name, int epicId) { // SubTask - часть Epic, поэтому для создания запрашивается epicId

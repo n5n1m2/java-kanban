@@ -7,17 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
     TaskManager taskManager;
+
     @BeforeEach
-    public void setTaskManager(){
+    public void setTaskManager() {
         taskManager = Managers.getDefault();
     }
 
     @Test
-    public void testTaskIdConflict(){
+    public void testTaskIdConflict() {
 
 
         Task newTestTask = new Task(15, "Имя", TaskStatus.NEW);
-        Task genId = new Task(TaskStatus.NEW, "Имя 1" );
+        Task genId = new Task(TaskStatus.NEW, "Имя 1");
 
         taskManager.addTask(newTestTask);
         taskManager.addTask(genId);
@@ -28,8 +29,9 @@ class InMemoryTaskManagerTest {
         assertNotNull(taskManager.getTaskById(0), "Не найдена задача с айди 1");
         assertNotNull(taskManager.getTaskById(1), "Не найдена задача с айди 2");
     }
+
     @Test
-    public void  equalityOfTasks(){ // Проверка неизменности задачи после добавления.
+    public void equalityOfTasks() { // Проверка неизменности задачи после добавления.
         Task task1 = new Task(TaskStatus.NEW, "Имя");
         taskManager.addTask(task1);
         Task task2 = taskManager.getTaskById(0);
@@ -38,7 +40,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void TasksAdd(){ // Проверка, что InMemoryTaskManager действительно добавляет задачи разного типа и может найти их по id;
+    public void TasksAdd() { // Проверка, что InMemoryTaskManager действительно добавляет задачи разного типа и может найти их по id;
         Task task = new Task(TaskStatus.NEW, "Имя");
         Epic epic = new Epic(TaskStatus.NEW, "Эпик");
         SubTask subTask = new SubTask(TaskStatus.NEW, "СабТаск", 1);
@@ -53,7 +55,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void addEpicAsSubTask(){
+    public void addEpicAsSubTask() {
         Epic epic = new Epic(TaskStatus.NEW, "Эпик");
         taskManager.addEpic(epic);
         SubTask subTask = new SubTask(0, "Имя", TaskStatus.NEW, 0);
@@ -64,7 +66,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void AddSubTaskAsEpic(){
+    public void AddSubTaskAsEpic() {
         SubTask subTask = new SubTask(0, "Имя", TaskStatus.NEW, 0);
         taskManager.addSubTask(subTask);
         assertNull(taskManager.getSubtaskById(0));
@@ -72,7 +74,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    public void equality(){
+    public void equality() {
         TaskManager taskManager1 = Managers.getDefault();
 
         Epic epic = new Epic(TaskStatus.NEW, "Эпик");
@@ -99,14 +101,14 @@ class InMemoryTaskManagerTest {
 
     //Внутри эпиков не должно оставаться неактуальных id подзадач.
     @Test
-    public void EpicSubTaskIdSavingTest(){
+    public void EpicSubTaskIdSavingTest() {
         taskManager.addEpic(new Epic(TaskStatus.NEW, "Эпик 1"));
         taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 3", 0));
         taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 2", 0));
         taskManager.addSubTask(new SubTask(TaskStatus.NEW, "Имя 1", 0));
         taskManager.deleteSubtaskById(1);
         taskManager.deleteSubtaskById(2);
-         System.out.println(taskManager.getEpicById(0).getSubTaskId());
-         assertEquals(1, taskManager.getEpicById(0).getSubTaskId().size(), "эпик сохранил лишний Id");
+        System.out.println(taskManager.getEpicById(0).getSubTaskId());
+        assertEquals(1, taskManager.getEpicById(0).getSubTaskId().size(), "эпик сохранил лишний Id");
     }
 }

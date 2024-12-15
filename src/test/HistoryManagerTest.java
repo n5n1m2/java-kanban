@@ -45,7 +45,7 @@ class HistoryManagerTest {
     public void HistoryManagerAddAndRemoveTest() {
         Task task = new Task(TaskStatus.NEW, "1");
         taskManager.addTask(task);
-         task = new Task(TaskStatus.NEW, "1");
+        task = new Task(TaskStatus.NEW, "1");
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);

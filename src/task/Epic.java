@@ -2,7 +2,7 @@ package task;
 
 import java.util.ArrayList;
 
-public class Epic extends  Task{
+public class Epic extends Task {
     private ArrayList<Integer> subTaskId = new ArrayList<>();
 
     public Epic(TaskStatus status, String name) {
@@ -17,7 +17,7 @@ public class Epic extends  Task{
         this.subTaskId.add(subTaskId);
     }
 
-    public void removeAllSubTask(){
+    public void removeAllSubTask() {
         subTaskId.clear();
     }
 
@@ -25,15 +25,15 @@ public class Epic extends  Task{
         return subTaskId;
     }
 
-    public void removeSubTask(int  id){
-        subTaskId.remove( (Integer) id);
+    public void removeSubTask(int id) {
+        subTaskId.remove((Integer) id);
     }
 
-    public int getSubTaskCount(){
+    public int getSubTaskCount() {
         return subTaskId.size();
     }
 
-    public void setEpicStatus(TaskStatus status){
+    public void setEpicStatus(TaskStatus status) {
         this.status = status;
     }
 
@@ -46,6 +46,6 @@ public class Epic extends  Task{
                 ", status=" + status +
                 ", SubTaskCount=" + subTaskId.size() +
                 '}'
-                 + "\n";
+                + "\n";
     }
 }
