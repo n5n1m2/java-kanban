@@ -20,7 +20,7 @@ class HistoryManagerTest {
 
 
     @Test
-    public void HistoryManagerSizeTest() {
+    public void historyManagerSizeTest() {
 
 
         int i;
@@ -42,7 +42,7 @@ class HistoryManagerTest {
     }
 
     @Test
-    public void HistoryManagerAddAndRemoveTest() {
+    public void historyManagerAddAndRemoveTest() {
         Task task = new Task(TaskStatus.NEW, "1");
         taskManager.addTask(task);
         task = new Task(TaskStatus.NEW, "1");
