@@ -12,7 +12,6 @@ public class Main {
 
         TaskManager taskManager = Managers.getDefault();
         Random random = new Random();
-
         Task task = new Task(TaskStatus.NEW, "Таск 0");
         taskManager.addTask(task);
         task = new Task(TaskStatus.NEW, "Таск 1");
@@ -36,6 +35,7 @@ public class Main {
         taskManager.getSubtaskById(4);
         taskManager.getSubtaskById(5);
         taskManager.getSubtaskById(3);
+        taskManager.getSubtaskById(5);
         taskManager.getEpicById(2);
         System.out.println(taskManager.getHistory() + "\n");
 

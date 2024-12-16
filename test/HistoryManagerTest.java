@@ -38,6 +38,7 @@ class HistoryManagerTest {
             }
         }
         List<Task> tasks = taskManager.getHistory();
+
         assertEquals(i, tasks.size(), "Не совпадают размеры. Вызвано " + i + " элементов, получено " + tasks.size() + " элементов.");
     }
 
