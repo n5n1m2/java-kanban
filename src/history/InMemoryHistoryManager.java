@@ -1,12 +1,15 @@
 package history;
 
-
 import task.*;
 
 import java.util.*;
 
 public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T> {
 
+    private Map<Integer, Node<T>> map = new HashMap<>();
+    private Node<T> head;
+    private Node<T> tail;
+    private int size = 0;
 
     @Override
     public void add(T task) {
@@ -29,27 +32,6 @@ public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T>
         removeById(id);
     }
 
-
-    Map<Integer, Node<T>> map = new HashMap<>();
-
-    class Node<E> {
-        private E data;
-        private Node<E> next;
-        private Node<E> prev;
-
-
-        public Node(Node<E> prev, E data, Node<E> next) {
-            this.prev = prev;
-            this.next = next;
-            this.data = data;
-        }
-    }
-
-    private Node<T> head;
-    private Node<T> tail;
-    private int size = 0;
-
-
     public void addFirst(T e, int id) {
         final Node<T> oldHead = head;
         final Node<T> newNode = new Node<>(null, e, oldHead);
@@ -62,7 +44,6 @@ public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T>
         size++;
         map.put(id, newNode);
     }
-
 
     public void addLast(T e, int id) {
         final Node<T> oldTail = tail;
@@ -121,6 +102,10 @@ public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T>
         map.remove(id);
     }
 
+    public boolean contain(int id) {
+        return map.containsKey(id);
+    }
+
     private void removeNode(Node<T> n) {
         if (n == null) {
             return;
@@ -142,7 +127,17 @@ public class InMemoryHistoryManager<T extends Task> implements HistoryManager<T>
         }
     }
 
-    public boolean contain(int id) {
-        return map.containsKey(id);
+    class Node<E> {
+
+        private E data;
+        private Node<E> next;
+        private Node<E> prev;
+
+        private Node(Node<E> prev, E data, Node<E> next) {
+            this.prev = prev;
+            this.next = next;
+            this.data = data;
+        }
+
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 
 public class InMemoryTaskManager implements TaskManager {
+
     private int id = 0;
     private HashMap<Integer, Task> taskHashMap = new HashMap<>();
     private HashMap<Integer, Epic> epicHashMap = new HashMap<>();
@@ -77,7 +78,6 @@ public class InMemoryTaskManager implements TaskManager {
         subTaskHashMap.clear();
     }
 
-
     @Override
     public void deleteTaskById(int id) {
         historyManager.remove(id);
@@ -123,7 +123,6 @@ public class InMemoryTaskManager implements TaskManager {
         historyManager.add(subTaskHashMap.getOrDefault(subTaskId, null));
         return subTaskHashMap.getOrDefault(subTaskId, null);
     }
-
 
     @Override
     public void taskUpdate(Task task) {
