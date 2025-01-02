@@ -1,8 +1,12 @@
 package task;
 
+import manager.TaskType;
+
 import java.util.ArrayList;
 
 public class Epic extends Task {
+    public static final TaskType tasktype = TaskType.EPIC;
+
     private ArrayList<Integer> subTaskId = new ArrayList<>();
 
     public Epic(TaskStatus status, String name) {

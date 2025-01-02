@@ -22,7 +22,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void addTask(Task task) {
         task.setId(id++);
         taskHashMap.put(task.getId(), task);
-
     }
 
     @Override
@@ -40,7 +39,6 @@ public class InMemoryTaskManager implements TaskManager {
             epic.addSubTaskId(subTask.getId());
             updateEpicStatus(epic);
         }
-
     }
 
     @Override

@@ -1,6 +1,10 @@
 package task;
 
+import manager.TaskType;
+
 public class SubTask extends Epic {
+    public static final TaskType taskType = TaskType.SUBTASK;
+
     protected int epicId;
 
     public SubTask(TaskStatus status, String name, int epicId) { // SubTask - часть Epic, поэтому для создания запрашивается epicId

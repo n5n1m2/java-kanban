@@ -2,7 +2,11 @@ package task;
 
 import java.util.Objects;
 
+import manager.TaskType;
+
 public class Task {
+    public static final TaskType taskType = TaskType.TASK;
+
     protected int id = -1;
     protected String name;
     protected TaskStatus status;
