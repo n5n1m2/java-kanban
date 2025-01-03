@@ -178,6 +178,14 @@ public class InMemoryTaskManager implements TaskManager {
     public List<Task> getHistory() {
         return historyManager.getHistory();
     }
+
+    protected ArrayList<Task> getAll(){
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.addAll(getAllTask());
+        tasks.addAll(getAllEpic());
+        tasks.addAll(getAllSubTask());
+        return tasks;
+    }
 }
 
 

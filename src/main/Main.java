@@ -11,7 +11,6 @@ public class Main {
         System.out.println("\n  \n \n");
 
         TaskManager taskManager = Managers.getDefault();
-        Random random = new Random();
         Task task = new Task(TaskStatus.NEW, "Таск 0");
         taskManager.addTask(task);
         task = new Task(TaskStatus.NEW, "Таск 1");
