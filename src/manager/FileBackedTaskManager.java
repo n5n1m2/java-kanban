@@ -5,10 +5,7 @@ import task.SubTask;
 import task.Task;
 import task.TaskStatus;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final File file;
@@ -90,20 +87,58 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     private void save() {
-        try(BufferedWriter br = new BufferedWriter(new FileWriter(file))) {
-            br.write("id,type,name,status,epic,subTaskCount");
-            br.newLine();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            bw.write("id,type,name,status,epic,subTaskCount");
+            bw.newLine();
             for (Task task : super.getAll()) {
-                br.write(task.toString());
-                br.newLine();
+                bw.write(task.toString());
+                bw.newLine();
             }
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
+    public static FileBackedTaskManager loadFromFile(File file) {
+        FileBackedTaskManager fbm = new FileBackedTaskManager(file);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            br.readLine();
+            while (br.ready()) {
+                int epicIdOrSubTaskCount = 0;
+                String[] sp = br.readLine().split(",");
+                int id = Integer.parseInt(sp[0]);
+                TaskType type = TaskType.valueOf(sp[1]);
+                String name = sp[2];
+                TaskStatus status = TaskStatus.valueOf(sp[3]);
+                if (sp.length >= 5) {
+                    epicIdOrSubTaskCount = Integer.parseInt(sp[4]);
+                }
+                fbm.id = id;
+                switch (type) {
+                    case TASK -> fbm.addTask(new Task(id, name, status));
+                    case EPIC ->
+                            fbm.addEpic(new Epic(id, name, status)); // epicIdOrSubTaskCount не используется, т.к кол-во сабтасков задает менеджер при привязке сабтаска к эпику.
+                    case SUBTASK -> fbm.addSubTask(new SubTask(id, name, status, epicIdOrSubTaskCount));
+                }
+            }
+            int counter = 0;
+            for (Task task : fbm.getAll()) {
+                if (task.getId() > counter) {
+                    counter = task.getId();
+                }
+            }
+            if (counter > 0) {
+                fbm.id = counter + 1;
+            }
+        } catch (IOException e) {
+
+        }
+        return fbm;
+    }
+
     public static void main(String[] args) throws IOException {
-        FileBackedTaskManager fb = new FileBackedTaskManager(File.createTempFile("Test", ".txt"));
+        File tf = File.createTempFile("Test", ".txt");
+        FileBackedTaskManager fb = new FileBackedTaskManager(tf);
         Task task = new Task(TaskStatus.NEW, "Таск 0");
         fb.addTask(task);
         task = new Task(TaskStatus.NEW, "Таск 1");
@@ -118,5 +153,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         fb.addSubTask(subTask);
         subTask = new SubTask(TaskStatus.NEW, "СабТаск 5", 2);
         fb.addSubTask(subTask);
+        System.out.println("\n\n\n" + fb.getAll() + "\n fb \n\n\n");
+
+        String filePath = tf.getAbsolutePath();
+
+        FileBackedTaskManager fb1 = loadFromFile(new File(filePath));
+
+        System.out.println(fb1.getAll());
     }
 }

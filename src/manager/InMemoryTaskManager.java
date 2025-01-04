@@ -11,7 +11,7 @@ import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    private int id = 0;
+    public int id = 0;
     private HashMap<Integer, Task> taskHashMap = new HashMap<>();
     private HashMap<Integer, Epic> epicHashMap = new HashMap<>();
     private HashMap<Integer, SubTask> subTaskHashMap = new HashMap<>();
@@ -179,13 +179,40 @@ public class InMemoryTaskManager implements TaskManager {
         return historyManager.getHistory();
     }
 
-    protected ArrayList<Task> getAll(){
+    public ArrayList<Task> getAll(){
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.addAll(getAllTask());
         tasks.addAll(getAllEpic());
         tasks.addAll(getAllSubTask());
         return tasks;
     }
+
+//    protected void addEpicFromFile(Epic epic, int id) {
+//        if (id > this.id) {
+//            this.id = (id + 1);
+//        }
+//        epicHashMap.put(id, epic);
+//    }
+//
+//    protected void addTaskFormFile(Task task, int id){
+//        if (id > this.id) {
+//            this.id = (id + 1);
+//        }
+//        taskHashMap.put(id, task);
+//    }
+//
+//    protected void addSubTaskFromFile(SubTask subTask, int id) {
+//        if (id > this.id) {
+//            this.id = (id + 1);
+//        }
+//        if (epicHashMap.containsKey(subTask.getEpicId())) {
+//            subTask.setId(id);
+//            subTaskHashMap.put(subTask.getId(), subTask);
+//            Epic epic = epicHashMap.get(subTask.getEpicId());
+//            epic.addSubTaskId(subTask.getId());
+//            updateEpicStatus(epic);
+//        }
+//    }
 }
 
 
