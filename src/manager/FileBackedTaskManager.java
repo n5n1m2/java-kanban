@@ -1,11 +1,14 @@
 package manager;
 
+import exceptions.ManagerSaveException;
 import task.Epic;
 import task.SubTask;
 import task.Task;
 import task.TaskStatus;
 
 import java.io.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final File file;
@@ -95,7 +98,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 bw.newLine();
             }
         } catch (IOException e) {
-            System.out.println(e);
+            throw new ManagerSaveException("Ошибка сохранения данных");
         }
     }
 
@@ -137,28 +140,33 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public static void main(String[] args) throws IOException {
-        File tf = File.createTempFile("Test", ".txt");
-        FileBackedTaskManager fb = new FileBackedTaskManager(tf);
-        Task task = new Task(TaskStatus.NEW, "Таск 0");
-        fb.addTask(task);
-        task = new Task(TaskStatus.NEW, "Таск 1");
-        fb.addTask(task);
+        File file = File.createTempFile("Test", ".txt");
+        String path = file.getAbsolutePath();
+        FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
 
-        Epic epic = new Epic(TaskStatus.NEW, "Эпик 2");
-        fb.addEpic(epic);
+        fbm.addTask(new Task(TaskStatus.NEW, "Таск 0"));
+        fbm.addTask(new Task(TaskStatus.IN_PROGRESS, "Таск 1"));
+        fbm.addTask(new Task(TaskStatus.DONE, "Таск 2"));
 
-        SubTask subTask = new SubTask(TaskStatus.NEW, "СабТаск 3", 2);
-        fb.addSubTask(subTask);
-        subTask = new SubTask(TaskStatus.NEW, "СабТаск 4", 2);
-        fb.addSubTask(subTask);
-        subTask = new SubTask(TaskStatus.NEW, "СабТаск 5", 2);
-        fb.addSubTask(subTask);
-        System.out.println("\n\n\n" + fb.getAll() + "\n fb \n\n\n");
+        fbm.addEpic(new Epic(TaskStatus.NEW, "Эпик 3"));
+        fbm.addEpic(new Epic(TaskStatus.NEW, "Эпик 4"));
 
-        String filePath = tf.getAbsolutePath();
+        fbm.addSubTask(new SubTask(TaskStatus.NEW, "сабтаск 5", 3));
+        fbm.addSubTask(new SubTask(TaskStatus.NEW, "сабтаск 6", 3));
+        fbm.addSubTask(new SubTask(TaskStatus.DONE, "сабтаск 7", 4));
+        fbm.addSubTask(new SubTask(TaskStatus.DONE, "сабтаск 8", 4));
 
-        FileBackedTaskManager fb1 = loadFromFile(new File(filePath));
+        FileBackedTaskManager fbm1 = loadFromFile(new File(path));
 
-        System.out.println(fb1.getAll());
+        if (fbm.getAll().size() == fbm1.getAll().size()) {
+            for (int i = 0; i < fbm1.getAll().size(); i++) {
+                if (fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
+                } else {
+                    throw new ManagerSaveException("Данные посл загрузки файла не совпадают");
+                }
+            }
+        } else {
+            throw new ManagerSaveException("Данные посл загрузки файла не совпадают");
+        }
     }
 }

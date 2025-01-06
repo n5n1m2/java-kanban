@@ -37,8 +37,6 @@ class FileBackedTaskManagerTest {
         assertEquals(6, fbm.getAll().size(), "Добавлены не все задачи");
 
         FileBackedTaskManager fbm1 = FileBackedTaskManager.loadFromFile(new File(path));
-//        System.out.println(fbm.getAll());
-//        System.out.println(fbm1.getAll());
         assertEquals(fbm.getAll().size(), fbm1.getAll().size(), "Размеры списков задач не совпадают после загрузки из файла");
 
         for (int i = 0; i < fbm1.getAll().size(); i++) {
