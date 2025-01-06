@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="create method FileBackedTaskManager.loadFromFile">
-      <change afterPath="$PROJECT_DIR$/src/exceptions/ManagerSaveException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="created  FileBackedTaskManager">
       <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +144,31 @@
       <option name="project" value="LOCAL" />
       <updated>1735995801944</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="created  FileBackedTaskManager">
+      <option name="closed" value="true" />
+      <created>1736154018174</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1736154018174</updated>
+    </task>
+    <task id="LOCAL-00008" summary="created  FileBackedTaskManager">
+      <option name="closed" value="true" />
+      <created>1736154076920</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1736154076920</updated>
+    </task>
+    <task id="LOCAL-00009" summary="created  FileBackedTaskManager">
+      <option name="closed" value="true" />
+      <created>1736154211850</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1736154211850</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,7 +203,8 @@
     <MESSAGE value="Change method toString() in Task" />
     <MESSAGE value="create method FileBackedTaskManager.Save()." />
     <MESSAGE value="create method FileBackedTaskManager.loadFromFile" />
-    <option name="LAST_COMMIT_MESSAGE" value="create method FileBackedTaskManager.loadFromFile" />
+    <MESSAGE value="created  FileBackedTaskManager" />
+    <option name="LAST_COMMIT_MESSAGE" value="created  FileBackedTaskManager" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

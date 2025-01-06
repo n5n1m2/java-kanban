@@ -8,8 +8,6 @@ import task.TaskStatus;
 
 import java.io.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final File file;
 
@@ -134,7 +132,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 fbm.id = counter + 1;
             }
         } catch (IOException e) {
-
+            throw new ManagerSaveException("Загрузки сохранения данных");
         }
         return fbm;
     }
@@ -160,13 +158,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
         if (fbm.getAll().size() == fbm1.getAll().size()) {
             for (int i = 0; i < fbm1.getAll().size(); i++) {
-                if (fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
-                } else {
-                    throw new ManagerSaveException("Данные посл загрузки файла не совпадают");
+                if (!fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
+                    throw new ManagerSaveException("Данные после загрузки файла не совпадают");
                 }
             }
         } else {
-            throw new ManagerSaveException("Данные посл загрузки файла не совпадают");
+            throw new ManagerSaveException("Данные после загрузки файла не совпадают");
         }
     }
 }
