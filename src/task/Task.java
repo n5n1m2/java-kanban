@@ -45,7 +45,7 @@ public class Task {
                 taskType,
                 name,
                 status
-                );
+        );
     }
 
     @Override
