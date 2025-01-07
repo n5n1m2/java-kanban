@@ -1,6 +1,10 @@
 package task;
 
+import manager.TaskType;
+
 public class SubTask extends Epic {
+    private static final TaskType taskType = TaskType.SUBTASK;
+
     protected int epicId;
 
     public SubTask(TaskStatus status, String name, int epicId) { // SubTask - часть Epic, поэтому для создания запрашивается epicId
@@ -19,11 +23,12 @@ public class SubTask extends Epic {
 
     @Override
     public String toString() {
-        return "SubTask{" +
-                "status=" + status +
-                ", name='" + name + '\'' +
-                ", id=" + id +
-                ", epicId=" + epicId +
-                '}' + "\n";
+        return String.format("%d,%S,%s,%s,%d",
+                id,
+                taskType,
+                name,
+                status,
+                epicId
+        );
     }
 }

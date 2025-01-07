@@ -3,15 +3,12 @@ package main;
 import manager.*;
 import task.*;
 
-import java.util.Random;
-
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("\n  \n \n");
 
         TaskManager taskManager = Managers.getDefault();
-        Random random = new Random();
         Task task = new Task(TaskStatus.NEW, "Таск 0");
         taskManager.addTask(task);
         task = new Task(TaskStatus.NEW, "Таск 1");

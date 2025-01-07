@@ -2,7 +2,11 @@ package task;
 
 import java.util.Objects;
 
+import manager.TaskType;
+
 public class Task {
+    private static final TaskType taskType = TaskType.TASK;
+
     protected int id = -1;
     protected String name;
     protected TaskStatus status;
@@ -36,11 +40,12 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", status=" + status +
-                '}' + "\n";
+        return String.format("%d,%S,%s,%s",
+                id,
+                taskType,
+                name,
+                status
+        );
     }
 
     @Override
