@@ -117,8 +117,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 fbm.id = id;
                 switch (type) {
                     case TASK -> fbm.addTask(new Task(id, name, status));
-                    case EPIC ->
-                            fbm.addEpic(new Epic(id, name, status)); // epicIdOrSubTaskCount не используется, т.к кол-во сабтасков задает менеджер при привязке сабтаска к эпику.
+                    case EPIC -> fbm.addEpic(new Epic(id, name, status));
                     case SUBTASK -> fbm.addSubTask(new SubTask(id, name, status, epicIdOrSubTaskCount));
                 }
             }
@@ -132,7 +131,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 fbm.id = counter + 1;
             }
         } catch (IOException e) {
-            throw new ManagerSaveException("Загрузки сохранения данных");
+            throw new ManagerSaveException("Ошибка загрузки сохранения данных");
         }
         return fbm;
     }
