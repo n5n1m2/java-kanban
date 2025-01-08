@@ -47,13 +47,9 @@ class FileBackedTaskManagerTest {
 
 
         fbm.addTask(new Task(TaskStatus.NEW, "123"));
-        System.out.println(fbm.id);
-        System.out.println(fbm.getAll());
 
         fbm1 = FileBackedTaskManager.loadFromFile(new File(path));
 
-        System.out.println(fbm1.id);
-        System.out.println(fbm1.getAll());
         assertEquals(fbm.getAll().size(), fbm1.getAll().size(), "Размеры списков задач не совпадают после загрузки из файла");
         for (int i = 0; i < fbm1.getAll().size(); i++) {
             assertEquals(fbm.getAll().get(i), fbm1.getAll().get(i), "Объекты в менеджере не совпадают после удаления задачи и загрузки файла");
