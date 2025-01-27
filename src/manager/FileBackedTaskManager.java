@@ -150,23 +150,23 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
 
         fbm.addTask(new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
-        fbm.addTask(new Task("Таск 1", TaskStatus.IN_PROGRESS, Duration.ofMinutes(45), LocalDateTime.of(2021,11,15,16,30)));
+        fbm.addTask(new Task("Таск 1", TaskStatus.IN_PROGRESS, Duration.ofMinutes(45), LocalDateTime.of(2024,11,15,16,30)));
         fbm.addTask(new Task("Таск 2", TaskStatus.DONE, Duration.ofMinutes(0), LocalDateTime.now()));
 
         fbm.addEpic(new Epic("Эпик 3", TaskStatus.NEW, LocalDateTime.now()));
         fbm.addEpic(new Epic("Эпик 4", TaskStatus.NEW, LocalDateTime.now()));
 
         fbm.addSubTask(new SubTask("Сабтаск 5", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now(), 3));
-        fbm.addSubTask(new SubTask("Сабтаск 6", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now(), 3));
-        fbm.addSubTask(new SubTask("Сабтаск 7", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 3));
-        fbm.addSubTask(new SubTask("Сабтаск 8", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 3));
+        fbm.addSubTask(new SubTask("Сабтаск 6", TaskStatus.NEW, Duration.ofHours(5), LocalDateTime.now(), 4));
+        fbm.addSubTask(new SubTask("Сабтаск 7", TaskStatus.DONE, Duration.ofHours(6), LocalDateTime.now(), 4));
+        fbm.addSubTask(new SubTask("Сабтаск 8", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 4));
 
         FileBackedTaskManager fbm1 = loadFromFile(new File(path));
 
         if (fbm.getAll().size() == fbm1.getAll().size()) {
             for (int i = 0; i < fbm1.getAll().size(); i++) {
-                System.out.println("FBM " + fbm.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime());
-                System.out.println("FBM1 " + fbm1.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime());
+                System.out.println("FBM " + fbm.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime().format(Task.FORMATTER));
+                System.out.println("FBM1 " + fbm1.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime().format(Task.FORMATTER));
                 System.out.println("\n\n");
                 if (!fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
                     throw new ManagerSaveException("Данные после загрузки файла не совпадают");

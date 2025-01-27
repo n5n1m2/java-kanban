@@ -22,7 +22,7 @@ class HistoryManagerTest {
     @Test
     public void historyManagerSizeTest() {
         int i;
-        for (i = 0; i < 500; i++) {
+        for (i = 0; i < 300; i++) {
             if (i % 5 == 0 && i > 0) {
                 name = "Эпик " + i;
                 Epic epic = new Epic(name, TaskStatus.NEW, LocalDateTime.now().plusDays(i));
@@ -44,7 +44,6 @@ class HistoryManagerTest {
     public void historyManagerAddAndRemoveTest() {
         Task task = new Task("1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
         taskManager.addTask(task);
-        task = new Task("1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);

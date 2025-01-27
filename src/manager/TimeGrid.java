@@ -9,15 +9,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.TreeMap;
 
 public class TimeGrid<T extends  Task> {
-    private LocalDateTime start = LocalDateTime.now().minusYears(1).truncatedTo(ChronoUnit.MINUTES);
-    private final LocalDateTime end = start.plusYears(1);
     private final TreeMap<LocalDateTime, Boolean> timeGrid = new TreeMap<>();
     private final int step = 15;
 
 public TimeGrid(){
-    while(start.isBefore(end)){
-        timeGrid.put(start, true);
-        start = start.plusMinutes(step);
+    LocalDateTime whileStart = LocalDateTime.now().minusYears(1).truncatedTo(ChronoUnit.DAYS);
+    LocalDateTime end = whileStart.plusYears(2);
+    while(whileStart.isBefore(end)){
+        timeGrid.put(whileStart, true);
+        whileStart = whileStart.plusMinutes(step);
     }
 }
 
@@ -25,7 +25,6 @@ public void add(T task){
     if (task.getStartTime() == null){
         return;
     }
-
     int minutes = task.getStartTime().getMinute()/step*step;
     LocalDate localDate = task.getStartTime().toLocalDate();
     LocalTime localTime = LocalTime.of(task.getStartTime().getHour(), minutes);

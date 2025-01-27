@@ -17,35 +17,45 @@ public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, SubTask> subTaskHashMap = new HashMap<>();
     private HistoryManager<Task> historyManager = Managers.getDefaultHistory();
     private TreeSet<Task> sortedTasks = new TreeSet<>(Task.compareByStartTime());
+    private TimeGrid<Task> timeGrid = new TimeGrid<Task>();
 
     @Override
     public void addTask(Task task) {
-        task.setId(id++);
-        taskHashMap.put(task.getId(), task);
         if (task.getStartTime() != null) {
-            sortedTasks.add(task);
+            if (timeGrid.timeIsAvailable(task)) {
+                task.setId(id++);
+                sortedTasks.add(task);
+                taskHashMap.put(task.getId(), task);
+                timeGrid.add(task);
+            }
         }
     }
 
     @Override
     public void addEpic(Epic epic) {
-        epic.setId(id++);
-        epicHashMap.put(epic.getId(), epic);
         if (epic.getStartTime() != null) {
-            sortedTasks.add(epic);
+            if (timeGrid.timeIsAvailable(epic)) {
+                epic.setId(id++);
+                epicHashMap.put(epic.getId(), epic);
+                sortedTasks.add(epic);
+                timeGrid.add(epic);
+            }
         }
     }
 
     @Override
     public void addSubTask(SubTask subTask) {
-        if (epicHashMap.containsKey(subTask.getEpicId())) {
-            subTask.setId(id++);
-            subTaskHashMap.put(subTask.getId(), subTask);
-            Epic epic = epicHashMap.get(subTask.getEpicId());
-            epic.addSubTaskId(subTask.getId());
-            updateEpicStatus(epic);
-            if (subTask.getStartTime() != null) {
-                sortedTasks.add(subTask);
+        if (subTask.getStartTime() != null) {
+            if (timeGrid.timeIsAvailable(subTask)) {
+                if (epicHashMap.containsKey(subTask.getEpicId())) {
+                    subTask.setId(id++);
+                    subTaskHashMap.put(subTask.getId(), subTask);
+                    Epic epic = epicHashMap.get(subTask.getEpicId());
+                    epic.addSubTaskId(subTask.getId());
+                    sortedTasks.add(subTask);
+                    timeGrid.add(subTask);
+                    updateEpicStatus(epic);
+                }
             }
         }
     }
@@ -137,42 +147,49 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void taskUpdate(Task task) {
         if (task.getStartTime() != null) {
-            sortedTasks.remove(taskHashMap.get(task.getId()));
-            sortedTasks.add(task);
-        } else {
-            sortedTasks.remove(taskHashMap.get(task.getId()));
+            if (timeGrid.timeIsAvailable(task)) {
+                sortedTasks.remove(taskHashMap.get(task.getId()));
+                sortedTasks.add(task);
+                taskHashMap.replace(task.getId(), task);
+                timeGrid.add(task);
+            }
         }
-        taskHashMap.replace(task.getId(), task);
     }
 
     @Override
     public void epicUpdate(Epic epic) {
+
         if (epic.getStartTime() != null) {
-            sortedTasks.remove(epicHashMap.get(epic.getId()));
-            sortedTasks.add(epic);
-        } else {
-            sortedTasks.remove(epicHashMap.get(epic.getId()));
+            if (timeGrid.timeIsAvailable(epic)) {
+                sortedTasks.remove(epicHashMap.get(epic.getId()));
+                sortedTasks.add(epic);
+                epicHashMap.replace(epic.getId(), epic);
+                timeGrid.add(epic);
+            }
         }
-        epicHashMap.replace(epic.getId(), epic);
         updateEpicStatus(epic);
     }
 
     @Override
     public void subTaskUpdate(SubTask subTask) {
         if (subTask.getStartTime() != null) {
-            sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
-            sortedTasks.add(subTask);
-        } else {
-            sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
-        }
-        if (subTask.getEpicId() == subTaskHashMap.get(subTask.getId()).getEpicId()) {
-            subTaskHashMap.replace(subTask.getId(), subTask);
-        } else {
-            Epic epic = epicHashMap.get(subTaskHashMap.get(subTask.getId()).getEpicId());
-            epic.removeSubTask(subTask.getId());
-            subTaskHashMap.replace(subTask.getId(), subTask);
-            epic = epicHashMap.get(subTask.getEpicId());
-            epic.addSubTaskId(subTask.getId());
+            if (timeGrid.timeIsAvailable(subTask)){
+                if (subTask.getEpicId() == subTaskHashMap.get(subTask.getId()).getEpicId()) {
+                    sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
+                    sortedTasks.add(subTask);
+                    timeGrid.add(subTask);
+                    subTaskHashMap.replace(subTask.getId(), subTask);
+                } else {
+                    Epic epic = epicHashMap.get(subTaskHashMap.get(subTask.getId()).getEpicId());
+                    epic.removeSubTask(subTask.getId());
+                    subTaskHashMap.replace(subTask.getId(), subTask);
+                    sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
+                    sortedTasks.add(subTask);
+                    timeGrid.add(subTask);
+                    epic = epicHashMap.get(subTask.getEpicId());
+                    epic.addSubTaskId(subTask.getId());
+                }
+            }
         }
         updateEpicStatus(epicHashMap.get(subTask.getEpicId()));
     }
@@ -247,10 +264,6 @@ public class InMemoryTaskManager implements TaskManager {
                 .map(map -> map.getValue().getEndTime())
                 .max(LocalDateTime::compareTo)
                 .orElse(null));
-    }
-
-    private Boolean durationValidate(Task task){
-
     }
 }
 
