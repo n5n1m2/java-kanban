@@ -61,7 +61,6 @@ public class Main {
         System.out.println(taskManager.getHistory() + "\n");
 
         taskManager.deleteTaskById(0);
-        taskManager.deleteSubtaskById(5);
 
         System.out.println(taskManager.getHistory() + "\n");
 
@@ -70,8 +69,5 @@ public class Main {
         taskManager.deleteEpicById(2);
 
         System.out.println(taskManager.getHistory() + "\n\n\n");
-
-
-
     }
 }

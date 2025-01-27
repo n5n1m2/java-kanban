@@ -7,6 +7,8 @@ import task.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class InMemoryTaskManager implements TaskManager {
@@ -88,10 +90,11 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeAllSubTask() {
-        for (Epic value : epicHashMap.values()) {
-            value.removeAllSubTask();
-            updateEpicStatus(value);
-        }
+        epicHashMap.values()
+                .forEach(epic -> {
+                    epic.removeAllSubTask();
+                    updateEpicStatus(epic);
+                });
         subTaskHashMap.clear();
     }
 
@@ -106,6 +109,12 @@ public class InMemoryTaskManager implements TaskManager {
     public void deleteEpicById(int id) {
         Epic epic = epicHashMap.get(id);
         sortedTasks.remove(epic);
+        epic.getSubTaskId().forEach(
+                subId -> {
+                    subTaskHashMap.remove(subId);
+                    historyManager.remove(subId);
+                }
+        );
         for (Integer i : epic.getSubTaskId()) {
             subTaskHashMap.remove(i);
             historyManager.remove(i);
@@ -173,7 +182,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void subTaskUpdate(SubTask subTask) {
         if (subTask.getStartTime() != null) {
-            if (timeGrid.timeIsAvailable(subTask)){
+            if (timeGrid.timeIsAvailable(subTask)) {
                 if (subTask.getEpicId() == subTaskHashMap.get(subTask.getId()).getEpicId()) {
                     sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
                     sortedTasks.add(subTask);
@@ -195,13 +204,12 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<SubTask> getEpicSubTask(int epicId) {
-        ArrayList<SubTask> subTasks = new ArrayList<>();
-        for (Integer i : epicHashMap.get(epicId).getSubTaskId()) {
-            subTasks.add(subTaskHashMap.get(i));
-
-        }
-        return subTasks;
+    public List<SubTask> getEpicSubTask(int epicId) {
+        return epicHashMap.get(epicId)
+                .getSubTaskId()
+                .stream()
+                .map(subTaskHashMap::get)
+                .collect(Collectors.toList());
     }
 
 
