@@ -8,25 +8,40 @@ import java.util.Objects;
 import manager.TaskType;
 
 public class Task {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private static final TaskType taskType = TaskType.TASK;
 
     protected int id = -1;
     protected String name;
     protected TaskStatus status;
     protected Duration duration = Duration.ZERO;
-    protected LocalDateTime startTime = LocalDateTime.of(1, 1 , 1, 0, 0);
-    protected LocalDateTime endTime = startTime.plus(duration);
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
-    public Task(TaskStatus status, String name) {
-        this.status = status;
+
+    public Task(String name, TaskStatus status, Duration duration, LocalDateTime startTime) {
         this.name = name;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = startTime.plus(duration);
     }
 
-    public Task(int id, String name, TaskStatus status) {
+
+    protected Task(String name, TaskStatus status, LocalDateTime startTime) {
+        this.name = name;
+        this.status = status;
+        this.startTime = startTime;
+        this.endTime = this.startTime.plus(duration);
+    }
+
+    public Task(int id, String name, TaskStatus status, Duration duration, LocalDateTime startTime) {
         this.id = id;
         this.name = name;
         this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = this.startTime.plus(duration);
     }
 
     public void setId(int id) {
@@ -60,14 +75,13 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%d,%S,%s,%s,%s,%s,%s",
+        return String.format("%d,%S,%s,%s,%s,%s",
                 id,
                 taskType,
                 name,
                 status,
                 (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
-                startTime.format(formatter),
-                endTime.format(formatter)
+                startTime.format(FORMATTER)
         );
     }
 

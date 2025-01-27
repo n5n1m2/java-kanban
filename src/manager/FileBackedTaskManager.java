@@ -7,9 +7,12 @@ import task.Task;
 import task.TaskStatus;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private final File file;
+
 
     private FileBackedTaskManager(File file) {
         this.file = file;
@@ -89,7 +92,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     private void save() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
-            bw.write("id,type,name,status,duration,startTime,endTime,epic,subTaskCount");
+            bw.write("id,type,name,status,duration,startTime,epic,subTaskCount");
             bw.newLine();
             for (Task task : super.getAll()) {
                 bw.write(task.toString());
@@ -111,14 +114,19 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 TaskType type = TaskType.valueOf(sp[1]);
                 String name = sp[2];
                 TaskStatus status = TaskStatus.valueOf(sp[3]);
-                if (sp.length >= 5) {
-                    epicIdOrSubTaskCount = Integer.parseInt(sp[4]);
+                String[] durationParts = sp[4].split(":");
+                Duration duration = Duration.ofDays(Long.parseLong(durationParts[0]))
+                        .plusHours(Long.parseLong(durationParts[1]))
+                        .plusMinutes(Long.parseLong(durationParts[2]));
+                LocalDateTime startTime = LocalDateTime.parse(sp[5], Task.FORMATTER);
+                if (sp.length >= 7) {
+                    epicIdOrSubTaskCount = Integer.parseInt(sp[6]);
                 }
                 fbm.id = id;
                 switch (type) {
-                    case TASK -> fbm.addTask(new Task(id, name, status));
-                    case EPIC -> fbm.addEpic(new Epic(id, name, status));
-                    case SUBTASK -> fbm.addSubTask(new SubTask(id, name, status, epicIdOrSubTaskCount));
+                    case TASK -> fbm.addTask(new Task(id, name, status, duration, startTime));
+                    case EPIC -> fbm.addEpic(new Epic(id, name, status, startTime));
+                    case SUBTASK -> fbm.addSubTask(new SubTask(id, name, status, duration, startTime, epicIdOrSubTaskCount));
                 }
             }
             int counter = 0;
@@ -141,22 +149,25 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         String path = file.getAbsolutePath();
         FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
 
-        fbm.addTask(new Task(TaskStatus.NEW, "Таск 0"));
-        fbm.addTask(new Task(TaskStatus.IN_PROGRESS, "Таск 1"));
-        fbm.addTask(new Task(TaskStatus.DONE, "Таск 2"));
+        fbm.addTask(new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
+        fbm.addTask(new Task("Таск 1", TaskStatus.IN_PROGRESS, Duration.ofMinutes(45), LocalDateTime.of(2021,11,15,16,30)));
+        fbm.addTask(new Task("Таск 2", TaskStatus.DONE, Duration.ofMinutes(0), LocalDateTime.now()));
 
-        fbm.addEpic(new Epic(TaskStatus.NEW, "Эпик 3"));
-        fbm.addEpic(new Epic(TaskStatus.NEW, "Эпик 4"));
+        fbm.addEpic(new Epic("Эпик 3", TaskStatus.NEW, LocalDateTime.now()));
+        fbm.addEpic(new Epic("Эпик 4", TaskStatus.NEW, LocalDateTime.now()));
 
-        fbm.addSubTask(new SubTask(TaskStatus.NEW, "сабтаск 5", 3));
-        fbm.addSubTask(new SubTask(TaskStatus.NEW, "сабтаск 6", 3));
-        fbm.addSubTask(new SubTask(TaskStatus.DONE, "сабтаск 7", 4));
-        fbm.addSubTask(new SubTask(TaskStatus.DONE, "сабтаск 8", 4));
+        fbm.addSubTask(new SubTask("Сабтаск 5", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now(), 3));
+        fbm.addSubTask(new SubTask("Сабтаск 6", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now(), 3));
+        fbm.addSubTask(new SubTask("Сабтаск 7", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 3));
+        fbm.addSubTask(new SubTask("Сабтаск 8", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 3));
 
         FileBackedTaskManager fbm1 = loadFromFile(new File(path));
 
         if (fbm.getAll().size() == fbm1.getAll().size()) {
             for (int i = 0; i < fbm1.getAll().size(); i++) {
+                System.out.println("FBM " + fbm.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime());
+                System.out.println("FBM1 " + fbm1.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime());
+                System.out.println("\n\n");
                 if (!fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
                     throw new ManagerSaveException("Данные после загрузки файла не совпадают");
                 }

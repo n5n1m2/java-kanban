@@ -2,19 +2,25 @@ package task;
 
 import manager.TaskType;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class SubTask extends Epic {
     private static final TaskType taskType = TaskType.SUBTASK;
 
     protected int epicId;
 
-    public SubTask(TaskStatus status, String name, int epicId) { // SubTask - часть Epic, поэтому для создания запрашивается epicId
-        super(status, name);
+    public SubTask(String name, TaskStatus status, Duration duration, LocalDateTime startTime, int epicId) {
+        super(name, status, duration, startTime);
         this.epicId = epicId;
+        this.endTime = this.startTime.plus(duration);
     }
 
-    public SubTask(int id, String name, TaskStatus status, int epicId) {
-        super(id, name, status);
+    public SubTask(int id, String name, TaskStatus status, Duration duration, LocalDateTime startTime, int epicId) {
+        super(id, name, status, startTime);
         this.epicId = epicId;
+        this.duration = duration;
+        this.endTime = this.startTime.plus(duration);
     }
 
     public int getEpicId() {
@@ -23,14 +29,13 @@ public class SubTask extends Epic {
 
     @Override
     public String toString() {
-        return String.format("%d,%S,%s,%s,%s,%s,%s,%d",
+        return String.format("%d,%S,%s,%s,%s,%s,%d",
                 id,
                 taskType,
                 name,
                 status,
                 (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
-                startTime.format(formatter),
-                endTime.format(formatter),
+                startTime.format(FORMATTER),
                 epicId
         );
     }
