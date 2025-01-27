@@ -4,9 +4,9 @@ package manager;
 import history.*;
 import task.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.*;
 
 
 public class InMemoryTaskManager implements TaskManager {
@@ -157,8 +157,29 @@ public class InMemoryTaskManager implements TaskManager {
         return subTasks;
     }
 
+
+    @Override
+    public List<Task> getHistory() {
+        return historyManager.getHistory();
+    }
+
+    @Override
+    public ArrayList<Task> getAll() {
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.addAll(getAllTask());
+        tasks.addAll(getAllEpic());
+        tasks.addAll(getAllSubTask());
+        return tasks;
+    }
+
     @Override
     public void updateEpicStatus(Epic epic) {
+        updEpicTaskStatus(epic);
+        epicUpdateDuration(epic);
+        epicUpdateEndTime(epic);
+    }
+
+    private void updEpicTaskStatus(Epic epic) {
         int counter = 0;
         for (Integer i : epic.getSubTaskId()) {
             if (subTaskHashMap.get(i).getStatus() == TaskStatus.DONE) {
@@ -174,45 +195,24 @@ public class InMemoryTaskManager implements TaskManager {
         }
     }
 
-    @Override
-    public List<Task> getHistory() {
-        return historyManager.getHistory();
+    private void epicUpdateDuration(Epic epic) {
+        epic.setDuration(subTaskHashMap
+                .entrySet()
+                .stream()
+                .filter(entry -> epic.getSubTaskId().contains(entry.getKey()))
+                .map(map -> map.getValue().getDuration())
+                .reduce(Duration.ZERO, Duration::plus));
     }
 
-    public ArrayList<Task> getAll() {
-        ArrayList<Task> tasks = new ArrayList<>();
-        tasks.addAll(getAllTask());
-        tasks.addAll(getAllEpic());
-        tasks.addAll(getAllSubTask());
-        return tasks;
+    private void epicUpdateEndTime(Epic epic) {
+        epic.setEndTime(subTaskHashMap
+                .entrySet()
+                .stream()
+                .filter(entry -> epic.getSubTaskId().contains(entry.getKey()))
+                .map(map -> map.getValue().getEndTime())
+                .max(LocalDateTime::compareTo)
+                .orElse(null));
     }
-
-//    protected void addEpicFromFile(Epic epic, int id) {
-//        if (id > this.id) {
-//            this.id = (id + 1);
-//        }
-//        epicHashMap.put(id, epic);
-//    }
-//
-//    protected void addTaskFormFile(Task task, int id){
-//        if (id > this.id) {
-//            this.id = (id + 1);
-//        }
-//        taskHashMap.put(id, task);
-//    }
-//
-//    protected void addSubTaskFromFile(SubTask subTask, int id) {
-//        if (id > this.id) {
-//            this.id = (id + 1);
-//        }
-//        if (epicHashMap.containsKey(subTask.getEpicId())) {
-//            subTask.setId(id);
-//            subTaskHashMap.put(subTask.getId(), subTask);
-//            Epic epic = epicHashMap.get(subTask.getEpicId());
-//            epic.addSubTaskId(subTask.getId());
-//            updateEpicStatus(epic);
-//        }
-//    }
 }
 
 

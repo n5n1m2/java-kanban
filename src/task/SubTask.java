@@ -23,11 +23,14 @@ public class SubTask extends Epic {
 
     @Override
     public String toString() {
-        return String.format("%d,%S,%s,%s,%d",
+        return String.format("%d,%S,%s,%s,%s,%s,%s,%d",
                 id,
                 taskType,
                 name,
                 status,
+                (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
+                startTime.format(formatter),
+                endTime.format(formatter),
                 epicId
         );
     }

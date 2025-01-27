@@ -1,5 +1,8 @@
 package task;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import manager.TaskType;
@@ -10,6 +13,10 @@ public class Task {
     protected int id = -1;
     protected String name;
     protected TaskStatus status;
+    protected Duration duration = Duration.ZERO;
+    protected LocalDateTime startTime = LocalDateTime.of(1, 1 , 1, 0, 0);
+    protected LocalDateTime endTime = startTime.plus(duration);
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public Task(TaskStatus status, String name) {
         this.status = status;
@@ -38,13 +45,29 @@ public class Task {
         return name;
     }
 
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     @Override
     public String toString() {
-        return String.format("%d,%S,%s,%s",
+        return String.format("%d,%S,%s,%s,%s,%s,%s",
                 id,
                 taskType,
                 name,
-                status
+                status,
+                (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
+                startTime.format(formatter),
+                endTime.format(formatter)
         );
     }
 
