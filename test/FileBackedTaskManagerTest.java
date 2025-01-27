@@ -7,7 +7,8 @@ import task.TaskStatus;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,19 +20,19 @@ class FileBackedTaskManagerTest {
         String path = file.getAbsolutePath();
         FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
 
-        Task task = new Task(TaskStatus.NEW, "Таск 0");
+        Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
         fbm.addTask(task);
-        task = new Task(TaskStatus.NEW, "Таск 1");
+        task = new Task("Таск 1", TaskStatus.NEW, Duration.ofMinutes(45), LocalDateTime.now().plusDays(1));
         fbm.addTask(task);
 
-        Epic epic = new Epic(TaskStatus.NEW, "Эпик 2");
+        Epic epic = new Epic("Эпик 2", TaskStatus.NEW, LocalDateTime.now().plusDays(2));
         fbm.addEpic(epic);
 
-        SubTask subTask = new SubTask(TaskStatus.NEW, "СабТаск 3", 2);
+        SubTask subTask = new SubTask("СабТаск 3", TaskStatus.NEW, Duration.ofHours(1), LocalDateTime.now().plusDays(3), 2);
         fbm.addSubTask(subTask);
-        subTask = new SubTask(TaskStatus.NEW, "СабТаск 4", 2);
+        subTask = new SubTask("СабТаск 4", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now().plusDays(3), 2);
         fbm.addSubTask(subTask);
-        subTask = new SubTask(TaskStatus.NEW, "СабТаск 5", 2);
+        subTask = new SubTask("СабТаск 5", TaskStatus.NEW, Duration.ofHours(3), LocalDateTime.now().plusDays(3), 2);
         fbm.addSubTask(subTask);
 
         assertEquals(6, fbm.getAll().size(), "Добавлены не все задачи");
@@ -45,8 +46,7 @@ class FileBackedTaskManagerTest {
 
         fbm.removeAllTask();
 
-
-        fbm.addTask(new Task(TaskStatus.NEW, "123"));
+        fbm.addTask(new Task("123", TaskStatus.NEW, Duration.ofMinutes(20), LocalDateTime.now()));
 
         fbm1 = FileBackedTaskManager.loadFromFile(new File(path));
 
@@ -62,16 +62,14 @@ class FileBackedTaskManagerTest {
         FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
         assertEquals(0, fbm.getAll().size(), "Созданы лишние объекты после загрузки файла.");
 
-        fbm.addTask(new Task(TaskStatus.NEW, "Имя"));
+        fbm.addTask(new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
         assertEquals(1, fbm.getAll().size(), "В загруженный из файла менеджер не добавляются задачи");
 
         fbm.removeAllTask();
         assertEquals(0, fbm.getAll().size(), "Из менеджера не удаляются задачи");
 
-        fbm.addTask(new Task(TaskStatus.NEW, "Имя"));
+        fbm.addTask(new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
         fbm.deleteTaskById(1);
         assertEquals(0, fbm.getAll().size(), "Из менеджера не удаляются задачи по айди");
     }
-
-
 }

@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.Comparator;
 
 import manager.TaskType;
 
@@ -96,5 +97,9 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, status);
+    }
+
+    public static Comparator<Task> compareByStartTime() {
+        return (task1, task2) -> task1.getStartTime().compareTo(task2.getStartTime());
     }
 }

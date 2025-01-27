@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add duration and time in tasks, edit InMemoryTaskManager">
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Edit loading from file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/task/Epic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/task/Epic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/task/SubTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/task/SubTask.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/task/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/task/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/ManagersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/ManagersTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Epic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/task/SubTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/SubTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/HistoryManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/HistoryManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/InMemoryTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/InMemoryTaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ManagersTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ManagersTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737940171974</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Edit loading from file">
+      <option name="closed" value="true" />
+      <created>1737948135903</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1737948135903</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,7 +259,8 @@
     <MESSAGE value="created  FileBackedTaskManager" />
     <MESSAGE value="Add deleting history in removeAllTask()" />
     <MESSAGE value="Add duration and time in tasks, edit InMemoryTaskManager" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add duration and time in tasks, edit InMemoryTaskManager" />
+    <MESSAGE value="Edit loading from file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit loading from file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
