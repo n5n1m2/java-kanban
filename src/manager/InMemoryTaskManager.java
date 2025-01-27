@@ -248,6 +248,10 @@ public class InMemoryTaskManager implements TaskManager {
                 .max(LocalDateTime::compareTo)
                 .orElse(null));
     }
+
+    private Boolean durationValidate(Task task){
+
+    }
 }
 
 
