@@ -19,10 +19,10 @@ class InMemoryTaskManagerTest {
     @Test
     public void testTaskIdConflict() {
         Task newTestTask = new Task(15, "Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
-        Task genId = new Task("Имя 1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
+        Task task = new Task("Имя 1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusHours(1));
 
         taskManager.addTask(newTestTask);
-        taskManager.addTask(genId);
+        taskManager.addTask(task);
 
         assertEquals(2, taskManager.getAllTask().size(), "Размер списка меньше, чем кол-во задач.");
         assertNotNull(taskManager.getTaskById(0), "Не найдена задача с айди 1");
@@ -41,7 +41,7 @@ class InMemoryTaskManagerTest {
     public void tasksAdd() {
         Task task = new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
         Epic epic = new Epic("Эпик", TaskStatus.NEW, LocalDateTime.now());
-        SubTask subTask = new SubTask("СабТаск", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now(), 1);
+        SubTask subTask = new SubTask("СабТаск", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusMinutes(40), 1);
         taskManager.addTask(task);
         taskManager.addEpic(epic);
         taskManager.addSubTask(subTask);
@@ -59,7 +59,7 @@ class InMemoryTaskManagerTest {
         SubTask subTask = new SubTask(0, "Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now(), 0);
         taskManager.addSubTask(subTask);
         assertNotEquals(taskManager.getEpicById(0), subTask);
-        assertNotEquals(0, taskManager.getSubtaskById(1).getSubTaskId(), "Айди эпика и сабтаски равны");
+        assertNotEquals(0, taskManager.getAllSubTask().getFirst(), "Айди эпика и сабтаски равны");
     }
 
     @Test
@@ -99,8 +99,8 @@ class InMemoryTaskManagerTest {
     public void epicSubTaskIdSavingTest() {
         taskManager.addEpic(new Epic("Эпик 1", TaskStatus.NEW, LocalDateTime.now()));
         taskManager.addSubTask(new SubTask("Имя 3", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now(), 0));
-        taskManager.addSubTask(new SubTask("Имя 2", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now(), 0));
-        taskManager.addSubTask(new SubTask("Имя 1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now(), 0));
+        taskManager.addSubTask(new SubTask("Имя 2", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusDays(1), 0));
+        taskManager.addSubTask(new SubTask("Имя 1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusHours(1), 0));
         taskManager.deleteSubtaskById(1);
         taskManager.deleteSubtaskById(2);
         assertEquals(1, taskManager.getEpicById(0).getSubTaskId().size(), "эпик сохранил лишний Id");

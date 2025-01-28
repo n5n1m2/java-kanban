@@ -24,8 +24,8 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void addTask(Task task) {
         if (task.getStartTime() != null) {
+            task.setId(id++);
             if (timeGrid.timeIsAvailable(task)) {
-                task.setId(id++);
                 sortedTasks.add(task);
                 taskHashMap.put(task.getId(), task);
                 timeGrid.add(task);
@@ -34,23 +34,20 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void addEpic(Epic epic) {
+    public void addEpic(Epic epic) { // Epic в timeGrid не сохраняется т.к его время выполнения зависит от сабтасков. Сабтаски в timegrid добавляются отдельно.
         if (epic.getStartTime() != null) {
-            if (timeGrid.timeIsAvailable(epic)) {
                 epic.setId(id++);
                 epicHashMap.put(epic.getId(), epic);
                 sortedTasks.add(epic);
-                timeGrid.add(epic);
             }
-        }
     }
 
     @Override
     public void addSubTask(SubTask subTask) {
         if (subTask.getStartTime() != null) {
+            subTask.setId(id++);
             if (timeGrid.timeIsAvailable(subTask)) {
                 if (epicHashMap.containsKey(subTask.getEpicId())) {
-                    subTask.setId(id++);
                     subTaskHashMap.put(subTask.getId(), subTask);
                     Epic epic = epicHashMap.get(subTask.getEpicId());
                     epic.addSubTaskId(subTask.getId());
@@ -79,12 +76,14 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeAllTask() {
+        taskHashMap.values().forEach(obj -> timeGrid.remove(obj));
         taskHashMap.clear();
     }
 
     @Override
     public void removeAllEpic() {
         epicHashMap.clear();
+        subTaskHashMap.values().forEach(obj -> timeGrid.remove(obj));
         subTaskHashMap.clear();
     }
 
@@ -95,12 +94,14 @@ public class InMemoryTaskManager implements TaskManager {
                     epic.removeAllSubTask();
                     updateEpicStatus(epic);
                 });
+        subTaskHashMap.values().forEach(obj -> timeGrid.remove(obj));
         subTaskHashMap.clear();
     }
 
     @Override
     public void deleteTaskById(int id) {
         historyManager.remove(id);
+        timeGrid.remove(taskHashMap.get(id));
         sortedTasks.remove(taskHashMap.get(id));
         taskHashMap.remove(id);
     }
@@ -111,25 +112,25 @@ public class InMemoryTaskManager implements TaskManager {
         sortedTasks.remove(epic);
         epic.getSubTaskId().forEach(
                 subId -> {
+                    timeGrid.remove(subTaskHashMap.get(subId));
                     subTaskHashMap.remove(subId);
                     historyManager.remove(subId);
                 }
         );
-        for (Integer i : epic.getSubTaskId()) {
-            subTaskHashMap.remove(i);
-            historyManager.remove(i);
-        }
         epic.removeAllSubTask();
         historyManager.remove(id);
+        timeGrid.remove(epicHashMap.get(id));
         epicHashMap.remove(epic.getId());
     }
 
     @Override
     public void deleteSubtaskById(int id) {
         SubTask subTask = subTaskHashMap.get(id);
-        sortedTasks.remove(subTask);
+
         Epic epic = epicHashMap.get(subTask.getEpicId());
         epic.removeSubTask(subTask.getId());
+        sortedTasks.remove(subTask);
+        timeGrid.remove(subTaskHashMap.get(id));
         subTaskHashMap.remove(subTask.getId());
         updateEpicStatus(epic);
         historyManager.remove(id);
@@ -156,25 +157,20 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void taskUpdate(Task task) {
         if (task.getStartTime() != null) {
-            if (timeGrid.timeIsAvailable(task)) {
+            if (timeGrid.replace(task, taskHashMap.get(task.getId()))){
                 sortedTasks.remove(taskHashMap.get(task.getId()));
                 sortedTasks.add(task);
                 taskHashMap.replace(task.getId(), task);
-                timeGrid.add(task);
             }
         }
     }
 
     @Override
-    public void epicUpdate(Epic epic) {
-
+    public void epicUpdate(Epic epic) { // Epic в timeGrid не сохраняется т.к его время выполнения зависит от сабтасков. Сабтаски в timegrid добавляются отдельно.
         if (epic.getStartTime() != null) {
-            if (timeGrid.timeIsAvailable(epic)) {
                 sortedTasks.remove(epicHashMap.get(epic.getId()));
                 sortedTasks.add(epic);
                 epicHashMap.replace(epic.getId(), epic);
-                timeGrid.add(epic);
-            }
         }
         updateEpicStatus(epic);
     }
@@ -186,15 +182,15 @@ public class InMemoryTaskManager implements TaskManager {
                 if (subTask.getEpicId() == subTaskHashMap.get(subTask.getId()).getEpicId()) {
                     sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
                     sortedTasks.add(subTask);
-                    timeGrid.add(subTask);
+                    timeGrid.replace(subTask,subTaskHashMap.get(subTask.getId()));
                     subTaskHashMap.replace(subTask.getId(), subTask);
                 } else {
                     Epic epic = epicHashMap.get(subTaskHashMap.get(subTask.getId()).getEpicId());
                     epic.removeSubTask(subTask.getId());
+                    timeGrid.replace(subTask,subTaskHashMap.get(subTask.getId()));
                     subTaskHashMap.replace(subTask.getId(), subTask);
                     sortedTasks.remove(subTaskHashMap.get(subTask.getId()));
                     sortedTasks.add(subTask);
-                    timeGrid.add(subTask);
                     epic = epicHashMap.get(subTask.getEpicId());
                     epic.addSubTaskId(subTask.getId());
                 }
@@ -243,14 +239,16 @@ public class InMemoryTaskManager implements TaskManager {
         int counter = 0;
         for (Integer i : epic.getSubTaskId()) {
             if (subTaskHashMap.get(i).getStatus() == TaskStatus.DONE) {
+                counter = counter + 2;
+            } else if (subTaskHashMap.get(i).getStatus() == TaskStatus.IN_PROGRESS) {
                 counter++;
             }
         }
         if (counter == 0) {
             epic.setEpicStatus(TaskStatus.NEW);
-        } else if (counter == epic.getSubTaskCount()) {
+        } else if (counter == epic.getSubTaskCount() * 2) {
             epic.setEpicStatus(TaskStatus.DONE);
-        } else if (counter < epic.getSubTaskCount()) {
+        } else if (counter < epic.getSubTaskCount() * 2) {
             epic.setEpicStatus(TaskStatus.IN_PROGRESS);
         }
     }

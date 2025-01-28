@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add TimeGrid">
+      <change afterPath="$PROJECT_DIR$/test/Sprint8Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/Managers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/Managers.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/TimeGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TimeGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/HistoryManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/HistoryManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/InMemoryTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/InMemoryTaskManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,10 +75,11 @@
   "keyToString": {
     "Application.FileBackedTaskManager.executor": "Run",
     "Application.Main.executor": "Run",
-    "JUnit.FileBackedTaskManagerTest.executor": "Debug",
+    "JUnit.FileBackedTaskManagerTest.executor": "Run",
     "JUnit.HistoryManagerTest.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.executor": "Run",
     "JUnit.ManagersTest.executor": "Run",
+    "JUnit.Sprint8Tests.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
@@ -294,5 +307,15 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="manager.TimeGrid" memberName="timeGrid" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((TimeGrid)((InMemoryTaskManager)taskManager).timeGrid).timeGrid" custom="manager.TimeGrid,manager.InMemoryTaskManager" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

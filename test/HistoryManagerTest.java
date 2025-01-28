@@ -30,7 +30,7 @@ class HistoryManagerTest {
                 taskManager.getEpicById(i);
             } else {
                 name = "Таск " + i;
-                Task task = new Task(name, TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusMinutes(i));
+                Task task = new Task(name, TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusDays(i));
                 taskManager.addTask(task);
                 taskManager.getTaskById(i);
             }

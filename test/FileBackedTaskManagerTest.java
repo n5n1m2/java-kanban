@@ -22,7 +22,7 @@ class FileBackedTaskManagerTest {
 
         Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
         fbm.addTask(task);
-        task = new Task("Таск 1", TaskStatus.NEW, Duration.ofMinutes(45), LocalDateTime.now().plusDays(1));
+        task = new Task("Таск 1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusDays(1));
         fbm.addTask(task);
 
         Epic epic = new Epic("Эпик 2", TaskStatus.NEW, LocalDateTime.now().plusDays(2));
@@ -30,9 +30,9 @@ class FileBackedTaskManagerTest {
 
         SubTask subTask = new SubTask("СабТаск 3", TaskStatus.NEW, Duration.ofHours(1), LocalDateTime.now().plusDays(3), 2);
         fbm.addSubTask(subTask);
-        subTask = new SubTask("СабТаск 4", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now().plusDays(3), 2);
+        subTask = new SubTask("СабТаск 4", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now().plusDays(4), 2);
         fbm.addSubTask(subTask);
-        subTask = new SubTask("СабТаск 5", TaskStatus.NEW, Duration.ofHours(3), LocalDateTime.now().plusDays(3), 2);
+        subTask = new SubTask("СабТаск 5", TaskStatus.NEW, Duration.ofHours(3), LocalDateTime.now().plusDays(5), 2);
         fbm.addSubTask(subTask);
 
         assertEquals(6, fbm.getAll().size(), "Добавлены не все задачи");
