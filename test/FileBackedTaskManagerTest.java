@@ -1,4 +1,7 @@
+import exceptions.ManagerSaveException;
 import manager.FileBackedTaskManager;
+import manager.Managers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import task.Epic;
 import task.SubTask;
@@ -7,17 +10,30 @@ import task.TaskStatus;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FileBackedTaskManagerTest {
+class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager>{
+    private File file;
+    String path;
+    FileBackedTaskManager fbm;
+
+    @BeforeEach
+    public void setTaskManagerAndSetTime() throws IOException {
+        file = File.createTempFile("Test", ".txt");
+        path = file.getAbsolutePath();
+        fbm = FileBackedTaskManager.loadFromFile(file);
+        super.setTaskManager(fbm, LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+    }
 
     @Test
     public void savingAndLoadingFromFile() throws IOException {
-        File file = File.createTempFile("Test", ".txt");
-        String path = file.getAbsolutePath();
         FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
 
         Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
@@ -58,8 +74,7 @@ class FileBackedTaskManagerTest {
 
     @Test
     public void saveEmptyFile() throws IOException {
-        File file = File.createTempFile("Test", ".txt");
-        FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
+        fbm = FileBackedTaskManager.loadFromFile(file);
         assertEquals(0, fbm.getAll().size(), "Созданы лишние объекты после загрузки файла.");
 
         fbm.addTask(new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
@@ -71,5 +86,16 @@ class FileBackedTaskManagerTest {
         fbm.addTask(new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
         fbm.deleteTaskById(1);
         assertEquals(0, fbm.getAll().size(), "Из менеджера не удаляются задачи по айди");
+    }
+
+    @Test
+    public void test(){
+        assertThrows(ManagerSaveException.class, () -> {
+            File newFile = File.createTempFile("Test", ".txt");
+            String path = newFile.getAbsolutePath();
+            Files.writeString(Path.of(path), "Текст\nТекст\nТекст");
+            FileBackedTaskManager test = FileBackedTaskManager.loadFromFile(newFile);
+
+        }, "Метод должен возвращать исключение.");
     }
 }

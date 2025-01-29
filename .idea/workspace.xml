@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add TimeGrid">
-      <change afterPath="$PROJECT_DIR$/test/Sprint8Tests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/Managers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/Managers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TimeGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TimeGrid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/HistoryManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/HistoryManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/InMemoryTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/InMemoryTaskManagerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add TimeGrid" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,12 +35,22 @@
     &quot;assignee&quot;: &quot;n5n1m2&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/n5n1m2/java-kanban.git&quot;,
-    &quot;accountId&quot;: &quot;f92058b5-e00b-424e-ab6a-19e979908aeb&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/n5n1m2/java-kanban.git",
+    "accountId": "f92058b5-e00b-424e-ab6a-19e979908aeb"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "n5n1m2",
+    "repository": "java-kanban"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -79,12 +73,14 @@
     "JUnit.HistoryManagerTest.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.executor": "Run",
     "JUnit.ManagersTest.executor": "Run",
+    "JUnit.Sprint8EpicStatusTest.executor": "Run",
     "JUnit.Sprint8Tests.executor": "Run",
+    "JUnit.TaskManagerTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "sprint__8-solution-time-and-duration",
+    "git-widget-placeholder": "#7 on sprint__8-solution-time-and-duration",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/project/Project/1/java-kanban",
     "project.structure.last.edited": "Modules",
@@ -251,7 +247,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737970966939</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Add TimeGrid">
+      <option name="closed" value="true" />
+      <created>1738141558662</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1738141558662</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add TimeGrid">
+      <option name="closed" value="true" />
+      <created>1738141898494</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1738141898494</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

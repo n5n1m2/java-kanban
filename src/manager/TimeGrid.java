@@ -16,7 +16,9 @@ public class TimeGrid<T extends Task> {
     public TimeGrid() {
         LocalDateTime whileStart = LocalDateTime.now().minusYears(0).truncatedTo(ChronoUnit.HOURS);
         LocalDateTime end = whileStart.plusYears(2);
-        while (whileStart.isBefore(end)) {
+        while (whileStart.isBefore(end)) { // Из-за небольшого шага заполнение таблицы занимает время (приблизительно секунду).
+            // Если такое время не подходит, то допускается ли ограничить пользователя во времени, которое он может указать?
+            // Например, допускается ли вариант с добавлением округления времени в конструктор тасков, чтобы можно было задать время только кратное переменной step?
             timeGrid.put(whileStart, empty);
             whileStart = whileStart.plusMinutes(step);
         }
