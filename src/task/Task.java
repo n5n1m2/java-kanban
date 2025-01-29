@@ -1,33 +1,60 @@
 package task;
 
-import java.util.Objects;
-
 import manager.TaskType;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.Objects;
+
 public class Task {
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private static final TaskType taskType = TaskType.TASK;
 
     protected int id = -1;
     protected String name;
     protected TaskStatus status;
+    protected Duration duration = Duration.ZERO;
+    protected LocalDateTime startTime;
+    protected LocalDateTime endTime;
 
-    public Task(TaskStatus status, String name) {
-        this.status = status;
+
+    public Task(String name, TaskStatus status, Duration duration, LocalDateTime startTime) {
         this.name = name;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = startTime.plus(duration);
     }
 
-    public Task(int id, String name, TaskStatus status) {
+
+    protected Task(String name, TaskStatus status, LocalDateTime startTime) {
+        this.name = name;
+        this.status = status;
+        this.startTime = startTime;
+        this.endTime = this.startTime.plus(duration);
+    }
+
+    public Task(int id, String name, TaskStatus status, Duration duration, LocalDateTime startTime) {
         this.id = id;
         this.name = name;
         this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = this.startTime.plus(duration);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static Comparator<Task> compareByStartTime() {
+        return (task1, task2) -> task1.getStartTime().compareTo(task2.getStartTime());
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public TaskStatus getStatus() {
@@ -38,13 +65,27 @@ public class Task {
         return name;
     }
 
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     @Override
     public String toString() {
-        return String.format("%d,%S,%s,%s",
+        return String.format("%d,%S,%s,%s,%s,%s",
                 id,
                 taskType,
                 name,
-                status
+                status,
+                (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
+                startTime.format(FORMATTER)
         );
     }
 
