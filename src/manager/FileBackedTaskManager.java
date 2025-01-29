@@ -138,8 +138,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             if (counter > 0) {
                 fbm.id = counter + 1;
             }
-        } catch (IOException e) {
-            throw new ManagerSaveException("Ошибка загрузки сохранения данных");
+        } catch (NumberFormatException | IOException e) {
+            throw new ManagerSaveException("Ошибка загрузки данных из файла");
         }
         return fbm;
     }

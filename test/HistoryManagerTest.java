@@ -6,50 +6,68 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class HistoryManagerTest {
-    TaskManager taskManager;
-    String name;
+class HistoryManagerTest extends TaskManagerTest<TaskManager> {
 
     @BeforeEach
-    public void h() {
-        taskManager = Managers.getDefault();
+    public void setTaskManagerAndSetTime() {
+        super.setTaskManager(Managers.getDefault(), LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
     }
 
     @Test
     public void historyManagerSizeTest() {
-        int i;
-        for (i = 0; i < 300; i++) {
-            if (i % 5 == 0 && i > 0) {
-                name = "Эпик " + i;
-                Epic epic = new Epic(name, TaskStatus.NEW, LocalDateTime.now().plusDays(i));
-                taskManager.addEpic(epic);
-                taskManager.getEpicById(i);
-            } else {
-                name = "Таск " + i;
-                Task task = new Task(name, TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusDays(i));
-                taskManager.addTask(task);
-                taskManager.getTaskById(i);
-            }
-        }
+        int count = 300;
+        time = super.addNewTask(count/2, TaskStatus.NEW, time);
+        super.addNewEpic(count/2);
+
+        IntStream.range(0, count/2).forEach(num -> taskManager.getTaskById(num));
+        IntStream.range(count/2, count).forEach(num -> taskManager.getEpicById(num));
         List<Task> tasks = taskManager.getHistory();
 
-        assertEquals(i, tasks.size(), "Не совпадают размеры. Вызвано " + i + " элементов, получено " + tasks.size() + " элементов.");
+        assertEquals(count, tasks.size(), "Не совпадают размеры. Вызвано " + count + " элементов, получено " + tasks.size() + " элементов.");
     }
 
     @Test
     public void historyManagerAddAndRemoveTest() {
-        Task task = new Task("1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
-        taskManager.addTask(task);
+        LocalDateTime oldTime = time;
+        time = super.addNewTask(1,TaskStatus.NEW, time);
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);
-        assertEquals(1, taskManager.getHistory().size(), "Не совпадает размер ожидаемого списка. Получено " + taskManager.getHistory().size() + " элементов, ожидается 1.");
-        taskManager.taskUpdate(new Task(0, "Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
+
+        assertEquals(1,
+                taskManager.getHistory().size(),
+                "Не совпадает размер ожидаемого списка. Получено " + taskManager.getHistory().size() + " элементов, ожидается 1.");
+
+        taskManager.taskUpdate(new Task(0, "Имя", TaskStatus.NEW, Duration.ofMinutes(30), oldTime));
         taskManager.getTaskById(0);
-        assertEquals("Имя", taskManager.getHistory().getFirst().getName(), "Не совпадают имена объектов");
+
+        assertEquals("Имя",
+                taskManager.getHistory().getFirst().getName(),
+                "Не совпадают имена объектов");
+
+        time = super.addNewTask(2,TaskStatus.NEW, time);
+        taskManager.getTaskById(1);
+        taskManager.getTaskById(2);
+        taskManager.deleteTaskById(1);
+
+        assertNotEquals(1,
+                taskManager.getHistory().get(1).getId(),
+                "Удаленная таска осталась в истории. Получен id " + taskManager.getHistory().get(1).getId());
+
+        super.addNewTask(2,TaskStatus.NEW, time);
+
+        int deleteTaskId = taskManager.getAllTask().getLast().getId();
+        taskManager.getTaskById(deleteTaskId);
+        taskManager.deleteTaskById(deleteTaskId);
+
+        assertEquals(true,
+                taskManager.getHistory().stream().allMatch(obj -> obj.getId() != deleteTaskId),
+                "Удаленная таска осталась в истории.");
     }
 }
