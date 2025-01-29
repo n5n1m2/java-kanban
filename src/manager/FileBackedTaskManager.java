@@ -18,6 +18,81 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         this.file = file;
     }
 
+    public static FileBackedTaskManager loadFromFile(File file) {
+        FileBackedTaskManager fbm = new FileBackedTaskManager(file);
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            br.readLine();
+            while (br.ready()) {
+                int epicIdOrSubTaskCount = 0;
+                String[] sp = br.readLine().split(",");
+                int id = Integer.parseInt(sp[0]);
+                TaskType type = TaskType.valueOf(sp[1]);
+                String name = sp[2];
+                TaskStatus status = TaskStatus.valueOf(sp[3]);
+                String[] durationParts = sp[4].split(":");
+                Duration duration = Duration.ofDays(Long.parseLong(durationParts[0]))
+                        .plusHours(Long.parseLong(durationParts[1]))
+                        .plusMinutes(Long.parseLong(durationParts[2]));
+                LocalDateTime startTime = LocalDateTime.parse(sp[5], Task.FORMATTER);
+                if (sp.length >= 7) {
+                    epicIdOrSubTaskCount = Integer.parseInt(sp[6]);
+                }
+                fbm.id = id;
+                switch (type) {
+                    case TASK -> fbm.addTask(new Task(id, name, status, duration, startTime));
+                    case EPIC -> fbm.addEpic(new Epic(id, name, status, startTime));
+                    case SUBTASK ->
+                            fbm.addSubTask(new SubTask(id, name, status, duration, startTime, epicIdOrSubTaskCount));
+                }
+            }
+            int counter = 0;
+            for (Task task : fbm.getAll()) {
+                if (task.getId() > counter) {
+                    counter = task.getId();
+                }
+            }
+            if (counter > 0) {
+                fbm.id = counter + 1;
+            }
+        } catch (NumberFormatException | IOException e) {
+            throw new ManagerSaveException("Ошибка загрузки данных из файла");
+        }
+        return fbm;
+    }
+
+    public static void main(String[] args) throws IOException {
+        File file = File.createTempFile("Test", ".txt");
+        String path = file.getAbsolutePath();
+        FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
+
+        fbm.addTask(new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
+        fbm.addTask(new Task("Таск 1", TaskStatus.IN_PROGRESS, Duration.ofMinutes(45), LocalDateTime.of(2024, 11, 15, 16, 30)));
+        fbm.addTask(new Task("Таск 2", TaskStatus.DONE, Duration.ofMinutes(0), LocalDateTime.now()));
+
+        fbm.addEpic(new Epic("Эпик 3", TaskStatus.NEW, LocalDateTime.now()));
+        fbm.addEpic(new Epic("Эпик 4", TaskStatus.NEW, LocalDateTime.now()));
+
+        fbm.addSubTask(new SubTask("Сабтаск 5", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now(), 3));
+        fbm.addSubTask(new SubTask("Сабтаск 6", TaskStatus.NEW, Duration.ofHours(5), LocalDateTime.now(), 4));
+        fbm.addSubTask(new SubTask("Сабтаск 7", TaskStatus.DONE, Duration.ofHours(6), LocalDateTime.now(), 4));
+        fbm.addSubTask(new SubTask("Сабтаск 8", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 4));
+
+        FileBackedTaskManager fbm1 = loadFromFile(new File(path));
+
+        if (fbm.getAll().size() == fbm1.getAll().size()) {
+            for (int i = 0; i < fbm1.getAll().size(); i++) {
+                System.out.println("FBM " + fbm.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime().format(Task.FORMATTER));
+                System.out.println("FBM1 " + fbm1.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime().format(Task.FORMATTER));
+                System.out.println("\n\n");
+                if (!fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
+                    throw new ManagerSaveException("Данные после загрузки файла не совпадают");
+                }
+            }
+        } else {
+            throw new ManagerSaveException("Данные после загрузки файла не совпадают");
+        }
+    }
+
     @Override
     public void addTask(Task task) {
         super.addTask(task);
@@ -100,80 +175,6 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             }
         } catch (IOException e) {
             throw new ManagerSaveException("Ошибка сохранения данных");
-        }
-    }
-
-    public static FileBackedTaskManager loadFromFile(File file) {
-        FileBackedTaskManager fbm = new FileBackedTaskManager(file);
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            br.readLine();
-            while (br.ready()) {
-                int epicIdOrSubTaskCount = 0;
-                String[] sp = br.readLine().split(",");
-                int id = Integer.parseInt(sp[0]);
-                TaskType type = TaskType.valueOf(sp[1]);
-                String name = sp[2];
-                TaskStatus status = TaskStatus.valueOf(sp[3]);
-                String[] durationParts = sp[4].split(":");
-                Duration duration = Duration.ofDays(Long.parseLong(durationParts[0]))
-                        .plusHours(Long.parseLong(durationParts[1]))
-                        .plusMinutes(Long.parseLong(durationParts[2]));
-                LocalDateTime startTime = LocalDateTime.parse(sp[5], Task.FORMATTER);
-                if (sp.length >= 7) {
-                    epicIdOrSubTaskCount = Integer.parseInt(sp[6]);
-                }
-                fbm.id = id;
-                switch (type) {
-                    case TASK -> fbm.addTask(new Task(id, name, status, duration, startTime));
-                    case EPIC -> fbm.addEpic(new Epic(id, name, status, startTime));
-                    case SUBTASK -> fbm.addSubTask(new SubTask(id, name, status, duration, startTime, epicIdOrSubTaskCount));
-                }
-            }
-            int counter = 0;
-            for (Task task : fbm.getAll()) {
-                if (task.getId() > counter) {
-                    counter = task.getId();
-                }
-            }
-            if (counter > 0) {
-                fbm.id = counter + 1;
-            }
-        } catch (NumberFormatException | IOException e) {
-            throw new ManagerSaveException("Ошибка загрузки данных из файла");
-        }
-        return fbm;
-    }
-
-    public static void main(String[] args) throws IOException {
-        File file = File.createTempFile("Test", ".txt");
-        String path = file.getAbsolutePath();
-        FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
-
-        fbm.addTask(new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
-        fbm.addTask(new Task("Таск 1", TaskStatus.IN_PROGRESS, Duration.ofMinutes(45), LocalDateTime.of(2024,11,15,16,30)));
-        fbm.addTask(new Task("Таск 2", TaskStatus.DONE, Duration.ofMinutes(0), LocalDateTime.now()));
-
-        fbm.addEpic(new Epic("Эпик 3", TaskStatus.NEW, LocalDateTime.now()));
-        fbm.addEpic(new Epic("Эпик 4", TaskStatus.NEW, LocalDateTime.now()));
-
-        fbm.addSubTask(new SubTask("Сабтаск 5", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now(), 3));
-        fbm.addSubTask(new SubTask("Сабтаск 6", TaskStatus.NEW, Duration.ofHours(5), LocalDateTime.now(), 4));
-        fbm.addSubTask(new SubTask("Сабтаск 7", TaskStatus.DONE, Duration.ofHours(6), LocalDateTime.now(), 4));
-        fbm.addSubTask(new SubTask("Сабтаск 8", TaskStatus.DONE, Duration.ofHours(2), LocalDateTime.now(), 4));
-
-        FileBackedTaskManager fbm1 = loadFromFile(new File(path));
-
-        if (fbm.getAll().size() == fbm1.getAll().size()) {
-            for (int i = 0; i < fbm1.getAll().size(); i++) {
-                System.out.println("FBM " + fbm.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime().format(Task.FORMATTER));
-                System.out.println("FBM1 " + fbm1.getAll().get(i) + " " + fbm1.getAll().get(i).getEndTime().format(Task.FORMATTER));
-                System.out.println("\n\n");
-                if (!fbm.getAll().get(i).equals(fbm1.getAll().get(i))) {
-                    throw new ManagerSaveException("Данные после загрузки файла не совпадают");
-                }
-            }
-        } else {
-            throw new ManagerSaveException("Данные после загрузки файла не совпадают");
         }
     }
 }

@@ -5,12 +5,14 @@ import task.Epic;
 import task.SubTask;
 import task.Task;
 import task.TaskStatus;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public abstract class TaskManagerTest<T extends TaskManager> {
 
@@ -37,7 +39,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void testTaskIdConflict() {
         Task newTestTask = new Task(15, "Имя", TaskStatus.NEW, Duration.ofMinutes(30), time);
-        Task task = new Task(15,"Имя 1", TaskStatus.NEW, Duration.ofMinutes(30), time.plusHours(1));
+        Task task = new Task(15, "Имя 1", TaskStatus.NEW, Duration.ofMinutes(30), time.plusHours(1));
 
         taskManager.addTask(newTestTask);
         taskManager.addTask(task);
@@ -148,6 +150,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
             id++;
             start = start.plusMinutes(30);
         }
-            return start;
+        return start;
     }
 }

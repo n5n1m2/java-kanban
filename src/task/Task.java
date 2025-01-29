@@ -1,12 +1,12 @@
 package task;
 
+import manager.TaskType;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.Comparator;
-
-import manager.TaskType;
+import java.util.Objects;
 
 public class Task {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
@@ -45,12 +45,16 @@ public class Task {
         this.endTime = this.startTime.plus(duration);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static Comparator<Task> compareByStartTime() {
+        return (task1, task2) -> task1.getStartTime().compareTo(task2.getStartTime());
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public TaskStatus getStatus() {
@@ -60,7 +64,6 @@ public class Task {
     public String getName() {
         return name;
     }
-
 
     public Duration getDuration() {
         return duration;
@@ -97,9 +100,5 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, status);
-    }
-
-    public static Comparator<Task> compareByStartTime() {
-        return (task1, task2) -> task1.getStartTime().compareTo(task2.getStartTime());
     }
 }

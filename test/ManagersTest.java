@@ -1,12 +1,13 @@
 import manager.Managers;
 import manager.TaskManager;
-import task.*;
 import org.junit.jupiter.api.Test;
+import task.Task;
+import task.TaskStatus;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ManagersTest {
     @Test

@@ -1,6 +1,6 @@
 package history;
 
-import task.*;
+import task.Task;
 
 import java.util.*;
 

@@ -1,8 +1,10 @@
-import manager.*;
+import manager.Managers;
+import manager.TaskManager;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+
 class InMemoryTaskManagerTest extends TaskManagerTest<TaskManager> {
 
     @BeforeEach

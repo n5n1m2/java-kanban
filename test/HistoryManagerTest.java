@@ -1,8 +1,9 @@
 import manager.Managers;
 import manager.TaskManager;
-import task.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import task.Task;
+import task.TaskStatus;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -10,7 +11,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class HistoryManagerTest extends TaskManagerTest<TaskManager> {
 
@@ -22,11 +24,11 @@ class HistoryManagerTest extends TaskManagerTest<TaskManager> {
     @Test
     public void historyManagerSizeTest() {
         int count = 300;
-        time = super.addNewTask(count/2, TaskStatus.NEW, time);
-        super.addNewEpic(count/2);
+        time = super.addNewTask(count / 2, TaskStatus.NEW, time);
+        super.addNewEpic(count / 2);
 
-        IntStream.range(0, count/2).forEach(num -> taskManager.getTaskById(num));
-        IntStream.range(count/2, count).forEach(num -> taskManager.getEpicById(num));
+        IntStream.range(0, count / 2).forEach(num -> taskManager.getTaskById(num));
+        IntStream.range(count / 2, count).forEach(num -> taskManager.getEpicById(num));
         List<Task> tasks = taskManager.getHistory();
 
         assertEquals(count, tasks.size(), "Не совпадают размеры. Вызвано " + count + " элементов, получено " + tasks.size() + " элементов.");
@@ -35,7 +37,7 @@ class HistoryManagerTest extends TaskManagerTest<TaskManager> {
     @Test
     public void historyManagerAddAndRemoveTest() {
         LocalDateTime oldTime = time;
-        time = super.addNewTask(1,TaskStatus.NEW, time);
+        time = super.addNewTask(1, TaskStatus.NEW, time);
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);
         taskManager.getTaskById(0);
@@ -51,7 +53,7 @@ class HistoryManagerTest extends TaskManagerTest<TaskManager> {
                 taskManager.getHistory().getFirst().getName(),
                 "Не совпадают имена объектов");
 
-        time = super.addNewTask(2,TaskStatus.NEW, time);
+        time = super.addNewTask(2, TaskStatus.NEW, time);
         taskManager.getTaskById(1);
         taskManager.getTaskById(2);
         taskManager.deleteTaskById(1);
@@ -60,7 +62,7 @@ class HistoryManagerTest extends TaskManagerTest<TaskManager> {
                 taskManager.getHistory().get(1).getId(),
                 "Удаленная таска осталась в истории. Получен id " + taskManager.getHistory().get(1).getId());
 
-        super.addNewTask(2,TaskStatus.NEW, time);
+        super.addNewTask(2, TaskStatus.NEW, time);
 
         int deleteTaskId = taskManager.getAllTask().getLast().getId();
         taskManager.getTaskById(deleteTaskId);

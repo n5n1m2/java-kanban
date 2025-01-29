@@ -1,6 +1,5 @@
 import exceptions.ManagerSaveException;
 import manager.FileBackedTaskManager;
-import manager.Managers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import task.Epic;
@@ -19,10 +18,10 @@ import java.time.temporal.ChronoUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager>{
-    private File file;
+class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
     String path;
     FileBackedTaskManager fbm;
+    private File file;
 
     @BeforeEach
     public void setTaskManagerAndSetTime() throws IOException {
@@ -89,7 +88,7 @@ class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager>{
     }
 
     @Test
-    public void test(){
+    public void test() {
         assertThrows(ManagerSaveException.class, () -> {
             File newFile = File.createTempFile("Test", ".txt");
             String path = newFile.getAbsolutePath();

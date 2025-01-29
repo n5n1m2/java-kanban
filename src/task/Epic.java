@@ -47,7 +47,7 @@ public class Epic extends Task {
         this.status = status;
     }
 
-    public void  setDuration(Duration duration){
+    public void setDuration(Duration duration) {
         this.duration = duration;
     }
 
