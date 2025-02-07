@@ -16,17 +16,15 @@ public class TimeGrid<T extends Task> {
     public TimeGrid() {
         LocalDateTime whileStart = LocalDateTime.now().minusYears(0).truncatedTo(ChronoUnit.HOURS);
         LocalDateTime end = whileStart.plusYears(2);
-        while (whileStart.isBefore(end)) { // Из-за небольшого шага заполнение таблицы занимает время (приблизительно секунду).
-            // Если такое время не подходит, то допускается ли ограничить пользователя во времени, которое он может указать?
-            // Например, допускается ли вариант с добавлением округления времени в конструктор тасков, чтобы можно было задать время только кратное переменной step?
+        while (whileStart.isBefore(end)) {
             timeGrid.put(whileStart, empty);
             whileStart = whileStart.plusMinutes(step);
         }
     }
 
-    public void add(T task) {
+    public boolean add(T task) {
         if (task.getStartTime() == null) {
-            return;
+            return false;
         }
         if (timeIsAvailable(task)) {
             LocalDateTime start = getTime(task.getStartTime());
@@ -34,26 +32,16 @@ public class TimeGrid<T extends Task> {
                 timeGrid.put(start, task.getId());
                 start = start.plusMinutes(step);
             }
+            return true;
         }
+        return false;
     }
 
     public boolean replace(T task, T oldTask) {
         if (task.getStartTime() == null || oldTask.getStartTime() == null) {
             return false;
         }
-        boolean taskIsAdded = taskCanBeAdded(task);
-        if (taskIsAdded) {
-            remove(oldTask);
-            LocalDateTime start = getTime(task.getStartTime());
-            while (start.isBefore(oldTask.getEndTime())) {
-                timeGrid.put(start, task.getId());
-                start = start.plusMinutes(step);
-            }
-            add(task);
-            return true;
-        } else {
-            return false;
-        }
+        return taskCanBeAdded(task) && remove(oldTask) && add(task);
     }
 
     public Boolean timeIsAvailable(T task) {
@@ -87,7 +75,7 @@ public class TimeGrid<T extends Task> {
     }
 
     private LocalDateTime getTime(LocalDateTime time) {
-        if (step > 1) { // Округляет минуты в меньшую сторону, если установить шаг более 1.
+        if (step > 1) {
             int minutes = time.getMinute() / step * step;
             LocalDate localDate = time.toLocalDate();
             LocalTime localTime = LocalTime.of(time.getHour(), minutes);
@@ -98,7 +86,7 @@ public class TimeGrid<T extends Task> {
 
     }
 
-    private Boolean taskCanBeAdded(T task) { // возвращает true, если на промежутке время занято объектом с тем же id
+    private Boolean taskCanBeAdded(T task) {
         LocalDateTime start = getTime(task.getStartTime());
         while (start.isBefore(getTime(task.getEndTime()))) {
             if (timeGrid.get(start) == task.getId()) {
