@@ -1,4 +1,6 @@
+import exceptions.ManagerSaveException;
 import manager.FileBackedTaskManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import task.Epic;
 import task.SubTask;
@@ -7,31 +9,45 @@ import task.TaskStatus;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FileBackedTaskManagerTest {
+class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
+    String path;
+    FileBackedTaskManager fbm;
+    private File file;
+
+    @BeforeEach
+    public void setTaskManagerAndSetTime() throws IOException {
+        file = File.createTempFile("Test", ".txt");
+        path = file.getAbsolutePath();
+        fbm = FileBackedTaskManager.loadFromFile(file);
+        super.setTaskManager(fbm, LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+    }
 
     @Test
     public void savingAndLoadingFromFile() throws IOException {
-        File file = File.createTempFile("Test", ".txt");
-        String path = file.getAbsolutePath();
         FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
 
-        Task task = new Task(TaskStatus.NEW, "Таск 0");
+        Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now());
         fbm.addTask(task);
-        task = new Task(TaskStatus.NEW, "Таск 1");
+        task = new Task("Таск 1", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now().plusDays(1));
         fbm.addTask(task);
 
-        Epic epic = new Epic(TaskStatus.NEW, "Эпик 2");
+        Epic epic = new Epic("Эпик 2", TaskStatus.NEW, LocalDateTime.now().plusDays(2));
         fbm.addEpic(epic);
 
-        SubTask subTask = new SubTask(TaskStatus.NEW, "СабТаск 3", 2);
+        SubTask subTask = new SubTask("СабТаск 3", TaskStatus.NEW, Duration.ofHours(1), LocalDateTime.now().plusDays(3), 2);
         fbm.addSubTask(subTask);
-        subTask = new SubTask(TaskStatus.NEW, "СабТаск 4", 2);
+        subTask = new SubTask("СабТаск 4", TaskStatus.NEW, Duration.ofHours(2), LocalDateTime.now().plusDays(4), 2);
         fbm.addSubTask(subTask);
-        subTask = new SubTask(TaskStatus.NEW, "СабТаск 5", 2);
+        subTask = new SubTask("СабТаск 5", TaskStatus.NEW, Duration.ofHours(3), LocalDateTime.now().plusDays(5), 2);
         fbm.addSubTask(subTask);
 
         assertEquals(6, fbm.getAll().size(), "Добавлены не все задачи");
@@ -45,8 +61,7 @@ class FileBackedTaskManagerTest {
 
         fbm.removeAllTask();
 
-
-        fbm.addTask(new Task(TaskStatus.NEW, "123"));
+        fbm.addTask(new Task("123", TaskStatus.NEW, Duration.ofMinutes(20), LocalDateTime.now()));
 
         fbm1 = FileBackedTaskManager.loadFromFile(new File(path));
 
@@ -58,20 +73,28 @@ class FileBackedTaskManagerTest {
 
     @Test
     public void saveEmptyFile() throws IOException {
-        File file = File.createTempFile("Test", ".txt");
-        FileBackedTaskManager fbm = FileBackedTaskManager.loadFromFile(file);
+        fbm = FileBackedTaskManager.loadFromFile(file);
         assertEquals(0, fbm.getAll().size(), "Созданы лишние объекты после загрузки файла.");
 
-        fbm.addTask(new Task(TaskStatus.NEW, "Имя"));
+        fbm.addTask(new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
         assertEquals(1, fbm.getAll().size(), "В загруженный из файла менеджер не добавляются задачи");
 
         fbm.removeAllTask();
         assertEquals(0, fbm.getAll().size(), "Из менеджера не удаляются задачи");
 
-        fbm.addTask(new Task(TaskStatus.NEW, "Имя"));
+        fbm.addTask(new Task("Имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
         fbm.deleteTaskById(1);
         assertEquals(0, fbm.getAll().size(), "Из менеджера не удаляются задачи по айди");
     }
 
+    @Test
+    public void test() {
+        assertThrows(ManagerSaveException.class, () -> {
+            File newFile = File.createTempFile("Test", ".txt");
+            String path = newFile.getAbsolutePath();
+            Files.writeString(Path.of(path), "Текст\nТекст\nТекст");
+            FileBackedTaskManager test = FileBackedTaskManager.loadFromFile(newFile);
 
+        }, "Метод должен возвращать исключение.");
+    }
 }

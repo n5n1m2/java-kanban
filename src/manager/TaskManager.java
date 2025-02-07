@@ -1,9 +1,12 @@
 package manager;
 
-import task.*;
+import task.Epic;
+import task.SubTask;
+import task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public interface TaskManager {
     void addTask(Task task);
@@ -42,11 +45,14 @@ public interface TaskManager {
 
     void subTaskUpdate(SubTask subTask);
 
-    ArrayList<SubTask> getEpicSubTask(int epicId);
+    List<SubTask> getEpicSubTask(int epicId);
+
+    ArrayList<Task> getAll();
+
+    TreeSet<Task> getPrioritizedTasks();
 
     void updateEpicStatus(Epic epic);
 
     List<Task> getHistory();
-
 
 }

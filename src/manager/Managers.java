@@ -1,6 +1,7 @@
 package manager;
 
-import history.*;
+import history.HistoryManager;
+import history.InMemoryHistoryManager;
 import task.Task;
 
 public class Managers {
