@@ -119,10 +119,12 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteTaskById(int id) {
-        taskHashMap.remove(id);
+        if (taskHashMap.get(id).getStartTime() != null) {
+            timeGrid.remove(taskHashMap.get(id));
+            sortedTasks.remove(taskHashMap.get(id));
+        }
         historyManager.remove(id);
-        timeGrid.remove(taskHashMap.get(id));
-        sortedTasks.remove(taskHashMap.get(id));
+        taskHashMap.remove(id);
     }
 
     @Override

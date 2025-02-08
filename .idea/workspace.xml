@@ -4,32 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add gets handle">
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/HistoryHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/PrioritizedTaskHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/DeleteEndpoints.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/Endpoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/PostEndpoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/GetsHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/GetsHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/GetsEndpoints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" afterDir="false" />
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add DeleteEndpoints">
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/task/Epic.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/task/Epic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/task/SubTask.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/task/SubTask.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/GetsHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/server/GetsEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/GetEndpoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TimeGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TimeGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/ManagersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/ManagersTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/TaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/TaskManagerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="sprint_9-solution-http-api" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -97,7 +76,7 @@
     "Application.FileBackedTaskManager.executor": "Run",
     "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.FileBackedTaskManagerTest.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.executor": "Debug",
     "JUnit.HistoryManagerTest.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.executor": "Run",
     "JUnit.ManagersTest.executor": "Run",
@@ -111,7 +90,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "sprint__9-solution-http-api",
+    "git-widget-placeholder": "#8 on sprint__9-solution-http-api",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/project/Project/1/java-kanban",
     "project.structure.last.edited": "Libraries",
@@ -418,7 +397,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739012685705</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Add DeleteEndpoints">
+      <option name="closed" value="true" />
+      <created>1739020098673</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1739020098673</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -464,7 +451,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/sprint_8-solution-time-and-duration' into sprint_8-solution-time-and-duration" />
     <MESSAGE value="fix InMemoryTaskManager" />
     <MESSAGE value="Add gets handle" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add gets handle" />
+    <MESSAGE value="Add DeleteEndpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add DeleteEndpoints" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -479,6 +467,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/FileBackedTaskManagerTest.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
