@@ -26,16 +26,20 @@ public class InMemoryTaskManager implements TaskManager {
     private TimeGrid<Task> timeGrid = new TimeGrid<Task>();
 
     @Override
-    public void addTask(Task task) {
+    public boolean addTask(Task task) {
         task.setId(id++);
         if (task.getStartTime() != null) {
             if (timeGrid.timeIsAvailable(task)) {
                 sortedTasks.add(task);
                 taskHashMap.put(task.getId(), task);
                 timeGrid.add(task);
+                return true;
+            } else {
+                return false;
             }
         } else {
             taskHashMap.put(task.getId(), task);
+            return true;
         }
     }
 
@@ -51,21 +55,27 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void addSubTask(SubTask subTask) {
+    public boolean addSubTask(SubTask subTask) {
         subTask.setId(id++);
-        if (subTask.getStartTime() != null && timeGrid.timeIsAvailable(subTask) && epicHashMap.containsKey(subTask.getEpicId())) {
+        if (subTask.getStartTime() != null && epicHashMap.containsKey(subTask.getEpicId())) {
+            if (!timeGrid.timeIsAvailable(subTask)) {
+                return false;
+            }
             subTaskHashMap.put(subTask.getId(), subTask);
             Epic epic = epicHashMap.get(subTask.getEpicId());
             epic.addSubTaskId(subTask.getId());
             sortedTasks.add(subTask);
             timeGrid.add(subTask);
             updateEpicStatus(epic);
+            return true;
         } else if (epicHashMap.containsKey(subTask.getEpicId())) {
             subTaskHashMap.put(subTask.getId(), subTask);
             Epic epic = epicHashMap.get(subTask.getEpicId());
             epic.addSubTaskId(subTask.getId());
             updateEpicStatus(epic);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -147,7 +157,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public Task getTaskById(int taskId) {
         historyManager.add(taskHashMap.getOrDefault(taskId, null));
-        return taskHashMap.getOrDefault(taskId, null);
+        return taskHashMap.get(taskId);
     }
 
     @Override
@@ -285,6 +295,7 @@ public class InMemoryTaskManager implements TaskManager {
                 .entrySet()
                 .stream()
                 .filter(entry -> epic.getSubTaskId().contains(entry.getKey()))
+                .filter(val -> val.getValue().getStartTime() != null)
                 .map(map -> map.getValue().getEndTime())
                 .max(LocalDateTime::compareTo)
                 .orElse(null));

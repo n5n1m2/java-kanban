@@ -33,17 +33,28 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 Duration duration = Duration.ofDays(Long.parseLong(durationParts[0]))
                         .plusHours(Long.parseLong(durationParts[1]))
                         .plusMinutes(Long.parseLong(durationParts[2]));
-                LocalDateTime startTime = LocalDateTime.parse(sp[5], Task.FORMATTER);
+
                 if (sp.length >= 7) {
                     epicIdOrSubTaskCount = Integer.parseInt(sp[6]);
                 }
                 fbm.id = id;
-                switch (type) {
-                    case TASK -> fbm.addTask(new Task(id, name, status, duration, startTime));
-                    case EPIC -> fbm.addEpic(new Epic(id, name, status, startTime));
-                    case SUBTASK ->
-                            fbm.addSubTask(new SubTask(id, name, status, duration, startTime, epicIdOrSubTaskCount));
+                if (sp[5].equals("null")) {
+                    switch (type) {
+                        case TASK -> fbm.addTask(new Task(id, name, status, duration, null));
+                        case EPIC -> fbm.addEpic(new Epic(id, name, status, null));
+                        case SUBTASK ->
+                                fbm.addSubTask(new SubTask(id, name, status, duration, null, epicIdOrSubTaskCount));
+                    }
+                } else {
+                    LocalDateTime startTime = LocalDateTime.parse(sp[5], Task.FORMATTER);
+                    switch (type) {
+                        case TASK -> fbm.addTask(new Task(id, name, status, duration, startTime));
+                        case EPIC -> fbm.addEpic(new Epic(id, name, status, startTime));
+                        case SUBTASK ->
+                                fbm.addSubTask(new SubTask(id, name, status, duration, startTime, epicIdOrSubTaskCount));
+                    }
                 }
+
             }
             int counter = 0;
             for (Task task : fbm.getAll()) {
@@ -94,9 +105,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void addTask(Task task) {
+    public boolean addTask(Task task) {
         super.addTask(task);
         save();
+        return false;
     }
 
     @Override
@@ -106,9 +118,10 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void addSubTask(SubTask subTask) {
+    public boolean addSubTask(SubTask subTask) {
         super.addSubTask(subTask);
         save();
+        return false;
     }
 
     @Override

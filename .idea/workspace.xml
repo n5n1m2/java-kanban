@@ -4,24 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Merge remote-tracking branch 'origin/sprint_8-solution-time-and-duration' into sprint_8-solution-time-and-duration">
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add gets handle">
+      <change afterPath="$PROJECT_DIR$/src/http/server/GetsEndpoints.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/GetsHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/GetsHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/GetsHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/GetsHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/ResponseWriter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/ResponseWriter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/Endpoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/Managers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/Managers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/task/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/task/Task.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/FileBackedTaskManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/InMemoryTaskManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/ManagersTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/ManagersTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/Sprint8EpicStatusTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/Sprint8EpicStatusTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/TaskManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/TaskManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/GetsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/GetsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/ResponseWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/ResponseWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/adapters/LocalDateTimeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/adapters/LocalDateTimeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/server/Endpoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TimeGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TimeGrid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/Epic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Epic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/SubTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/SubTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/Task.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +73,8 @@
     },
     &quot;owner&quot;: &quot;n5n1m2&quot;,
     &quot;repository&quot;: &quot;java-kanban&quot;
-  }
+  },
+  &quot;editorReviewEnabled&quot;: false
 }</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -83,29 +90,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FileBackedTaskManager.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FileBackedTaskManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.HistoryManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.InMemoryTaskManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ManagersTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.Sprint8EpicStatusTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.Sprint8Tests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TaskManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#7 on sprint__8-solution-time-and-duration&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/project/Project/1/java-kanban&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FileBackedTaskManager.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.FileBackedTaskManagerTest.executor": "Run",
+    "JUnit.HistoryManagerTest.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.executor": "Run",
+    "JUnit.ManagersTest.executor": "Run",
+    "JUnit.Sprint8EpicStatusTest.executor": "Run",
+    "JUnit.Sprint8Tests.executor": "Run",
+    "JUnit.TaskManagerTest.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "sprint__9-solution-http-api",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/project/Project/1/java-kanban",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -119,6 +130,26 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="manager" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="java-kanban" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -361,7 +392,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738142864031</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix InMemoryTaskManager">
+      <option name="closed" value="true" />
+      <created>1738922567829</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1738922567829</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Add gets handle">
+      <option name="closed" value="true" />
+      <created>1739001647231</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1739001647231</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -405,7 +452,11 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/sprint_8-solution-time-and-duration' into sprint_8-solution-time-and-duration&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="fix" />
     <MESSAGE value="Merge remote-tracking branch 'origin/sprint_8-solution-time-and-duration' into sprint_8-solution-time-and-duration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/sprint_8-solution-time-and-duration' into sprint_8-solution-time-and-duration" />
+    <MESSAGE value="fix InMemoryTaskManager" />
+    <MESSAGE value="Add gets handle" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add gets handle" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -427,7 +478,7 @@
     </pin-to-top-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="((TimeGrid)((InMemoryTaskManager)taskManager).timeGrid).timeGrid" custom="manager.TimeGrid,manager.InMemoryTaskManager" />
+        <watch expression="((TimeGrid)((InMemoryTaskManager)taskManager).timeGrid).timeGrid" language="JAVA" custom="manager.TimeGrid,manager.InMemoryTaskManager" />
       </configuration>
     </watches-manager>
   </component>
