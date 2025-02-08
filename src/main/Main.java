@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 
 public class Main {
 
+
     public static void main(String[] args) throws IOException {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
@@ -35,8 +36,6 @@ public class Main {
         taskManager.getTaskById(0);
         String json = gson.toJson(taskManager.getPrioritizedTasks());
         System.out.println(taskManager.getAllSubTask());
-
-
 
 
     }

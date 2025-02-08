@@ -14,7 +14,7 @@ public class TimeGrid<T extends Task> {
     private final int empty = -1;
 
     public TimeGrid() {
-        LocalDateTime whileStart = LocalDateTime.now().minusYears(0).truncatedTo(ChronoUnit.HOURS);
+        LocalDateTime whileStart = LocalDateTime.now().minusHours(4).truncatedTo(ChronoUnit.HOURS);
         LocalDateTime end = whileStart.plusYears(2);
         while (whileStart.isBefore(end)) {
             timeGrid.put(whileStart, empty);
@@ -34,6 +34,7 @@ public class TimeGrid<T extends Task> {
             }
             return true;
         }
+        System.out.println("Таск адед");
         return false;
     }
 
@@ -95,7 +96,7 @@ public class TimeGrid<T extends Task> {
         }
         LocalDateTime start = getTime(task.getStartTime());
         while (start.isBefore(getTime(task.getEndTime()))) {
-            if (timeGrid.get(start) == task.getId()) {
+            if (timeGrid.get(start) == task.getId() || timeGrid.get(start) == empty) {
                 start = start.plusMinutes(step);
             } else {
                 return false;

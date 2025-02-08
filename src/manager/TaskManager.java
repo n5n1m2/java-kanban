@@ -39,11 +39,11 @@ public interface TaskManager {
 
     SubTask getSubtaskById(int subTaskId);
 
-    void taskUpdate(Task task);
+    boolean taskUpdate(Task task);
 
-    void epicUpdate(Epic epic);
+    boolean epicUpdate(Epic epic);
 
-    void subTaskUpdate(SubTask subTask);
+    boolean subTaskUpdate(SubTask subTask);
 
     List<SubTask> getEpicSubTask(int epicId);
 

@@ -161,21 +161,24 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void taskUpdate(Task task) {
+    public boolean taskUpdate(Task task) {
         super.taskUpdate(task);
         save();
+        return false;
     }
 
     @Override
-    public void epicUpdate(Epic epic) {
+    public boolean epicUpdate(Epic epic) {
         super.epicUpdate(epic);
         save();
+        return false;
     }
 
     @Override
-    public void subTaskUpdate(SubTask subTask) {
+    public boolean subTaskUpdate(SubTask subTask) {
         super.subTaskUpdate(subTask);
         save();
+        return false;
     }
 
     private void save() {
