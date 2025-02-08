@@ -61,6 +61,9 @@ public class TimeGrid<T extends Task> {
     }
 
     public boolean remove(T task) {
+        if (task.getStartTime() == null) {
+            return false;
+        }
         boolean taskIsAdded = taskCanBeAdded(task);
         if (taskIsAdded) {
             LocalDateTime start = getTime(task.getStartTime());
@@ -87,6 +90,9 @@ public class TimeGrid<T extends Task> {
     }
 
     private Boolean taskCanBeAdded(T task) {
+        if (task.getStartTime() == null) {
+            return false;
+        }
         LocalDateTime start = getTime(task.getStartTime());
         while (start.isBefore(getTime(task.getEndTime()))) {
             if (timeGrid.get(start) == task.getId()) {

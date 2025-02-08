@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import http.handlers.adapters.DurationAdapter;
 import http.handlers.adapters.LocalDateTimeAdapter;
 import http.server.Server;
-import manager.InMemoryTaskManager;
+import manager.TaskManager;
 import task.Epic;
 import task.SubTask;
 import task.Task;
@@ -22,9 +22,8 @@ public class Main {
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .registerTypeAdapter(Duration.class, new DurationAdapter())
                 .create();
+        TaskManager taskManager = Server.serverStart();
 
-        InMemoryTaskManager taskManager = new InMemoryTaskManager();
-        Server server = new Server(taskManager);
 
 
         taskManager.addTask(new Task("имя", TaskStatus.NEW, Duration.ofMinutes(30), LocalDateTime.now()));
@@ -36,9 +35,6 @@ public class Main {
         taskManager.getTaskById(0);
         String json = gson.toJson(taskManager.getPrioritizedTasks());
         System.out.println(taskManager.getAllSubTask());
-
-
-        server.serverStart();
 
 
 
