@@ -249,6 +249,9 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<SubTask> getEpicSubTask(int epicId) {
+        if (!epicHashMap.containsKey(epicId)) {
+            return null;
+        }
         return epicHashMap.get(epicId)
                 .getSubTaskId()
                 .stream()
