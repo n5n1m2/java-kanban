@@ -25,8 +25,6 @@ public class HistoryHandler implements HttpHandler {
 
     public void handle(HttpExchange exchange) {
         GetEndpoints endpoint = GetEndpoints.endpointFromPatch(exchange.getRequestURI().getPath());
-        System.out.println(endpoint);
-
         switch (endpoint) {
             case GET_HISTORY -> getHistory(exchange);
             default -> ResponseWriter.writeResponse(exchange, null, 404);

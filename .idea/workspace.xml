@@ -4,28 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Fix tests">
-      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerEpicTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerTaskTest.java" afterDir="false" />
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Add Tests For Epics And Tasks">
+      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerHistoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerPrioritizedTaskTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerSubTaskTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/EpicHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/EpicHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/HistoryHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/HistoryHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/HistoryHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/HistoryHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/PrioritizedTaskHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/PrioritizedTaskHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/PrioritizedTaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/PrioritizedTaskHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/SubTaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/SubTaskHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/TaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/TaskHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/DeleteEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/DeleteEndpoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/GetEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/GetEndpoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/PostEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/PostEndpoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/Sprint8EpicStatusTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/Sprint8EpicStatusTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HttpTaskManagerTaskTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HttpTaskManagerTaskTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/HistoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/HistoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/PrioritizedTaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/PrioritizedTaskHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/endpoints/DeleteEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/DeleteEndpoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/endpoints/GetEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/GetEndpoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/endpoints/PostEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/PostEndpoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/HttpTaskManagerEpicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/HttpTaskManagerEpicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/HttpTaskManagerTaskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/HttpTaskManagerTaskTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +92,9 @@
     "JUnit.FileBackedTaskManagerTest.executor": "Run",
     "JUnit.HistoryManagerTest.executor": "Run",
     "JUnit.HttpTaskManagerEpicTest.executor": "Run",
+    "JUnit.HttpTaskManagerHistoryTest.executor": "Run",
+    "JUnit.HttpTaskManagerPrioritizedTaskTest.executor": "Debug",
+    "JUnit.HttpTaskManagerSubTaskTest.executor": "Run",
     "JUnit.HttpTaskManagerTaskTest.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.executor": "Run",
     "JUnit.ManagersTest.executor": "Run",
@@ -131,7 +130,7 @@
       <recent name="manager" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.HttpTaskManagerPrioritizedTaskTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="java-kanban" />
@@ -141,6 +140,24 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpTaskManagerPrioritizedTaskTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HttpTaskManagerPrioritizedTaskTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpTaskManagerSubTaskTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HttpTaskManagerSubTaskTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -156,6 +173,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.HttpTaskManagerPrioritizedTaskTest" />
+        <item itemvalue="JUnit.HttpTaskManagerSubTaskTest" />
         <item itemvalue="JUnit.HttpTaskManagerTaskTest" />
         <item itemvalue="Application.Main" />
       </list>
@@ -458,7 +477,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739088867568</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Add Tests For Epics And Tasks">
+      <option name="closed" value="true" />
+      <created>1739107297486</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1739107297486</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -506,7 +533,8 @@
     <MESSAGE value="Add gets handle" />
     <MESSAGE value="Add DeleteEndpoints" />
     <MESSAGE value="Fix tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix tests" />
+    <MESSAGE value="Add Tests For Epics And Tasks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Tests For Epics And Tasks" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -522,13 +550,18 @@
           <option name="timeStamp" value="5" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/manager/TimeGrid.java</url>
-          <line>92</line>
-          <properties class="manager.TimeGrid" method="taskCanBeAdded">
+          <url>file://$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java</url>
+          <line>55</line>
+          <properties class="http.handlers.SubTaskHandler" method="addSubTask">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="26" />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/http/handlers/PrioritizedTaskHandler.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -10,6 +10,8 @@ import manager.TaskManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import task.Epic;
+import task.SubTask;
 import task.Task;
 import task.TaskStatus;
 
@@ -25,7 +27,7 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class HttpTaskManagerTaskTest {
+public class HttpTaskManagerSubTaskTest {
     private Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
             .registerTypeAdapter(Duration.class, new DurationAdapter())
@@ -36,7 +38,7 @@ public class HttpTaskManagerTaskTest {
     private LocalDateTime now = LocalDateTime.now();
     private HttpClient client = HttpClient.newBuilder().build();
 
-    public HttpTaskManagerTaskTest() throws IOException {
+    public HttpTaskManagerSubTaskTest() throws IOException {
     }
 
     @BeforeEach
@@ -50,47 +52,58 @@ public class HttpTaskManagerTaskTest {
     }
 
     @Test
-    public void addTask() throws URISyntaxException, IOException, InterruptedException {
-        Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), now);
+    public void addSubTask() throws URISyntaxException, IOException, InterruptedException {
+        Epic epic = new Epic("Эпик 0", TaskStatus.NEW, now);
+        taskManager.addEpic(epic);
+
+        SubTask task = new SubTask("Таск 1", TaskStatus.NEW, Duration.ofMinutes(30), now, 0);
         String json = gson.toJson(task);
 
-        URI uri = new URI("http://localhost:8080/tasks");
+        URI uri = new URI("http://localhost:8080/subtasks");
         HttpRequest request = HttpRequest.newBuilder().uri(uri).POST(HttpRequest.BodyPublishers.ofString(json)).build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertEquals(201, response.statusCode(), "Получен неверный код ответа сервера");
-        assertEquals(1, taskManager.getAllTask().size(), "Задача не была добавлена в таскменеджер");
-        assertEquals(task.getName(), taskManager.getAllTask().getFirst().getName(), "Имя задач не совпадает");
+        assertEquals(1, taskManager.getAllSubTask().size(), "Задача не была добавлена в таскменеджер");
+        assertEquals(task.getName(), taskManager.getAllSubTask().getFirst().getName(), "Имя задач не совпадает");
 
-        task = new Task("Таск 2", TaskStatus.NEW, Duration.ofMinutes(30), now.minusMinutes(5));
+        task = new SubTask("Таск 2", TaskStatus.NEW, Duration.ofMinutes(30), now.minusMinutes(5), 0);
         json = gson.toJson(task);
         request = HttpRequest.newBuilder().uri(uri).POST(HttpRequest.BodyPublishers.ofString(json)).build();
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertEquals(406, response.statusCode(), "Получен неверный код ответа сервера");
-        assertEquals(1, taskManager.getAllTask().size());
+        assertEquals(1, taskManager.getAllSubTask().size());
+
     }
 
-    @Test
-    public void removeTask() throws URISyntaxException, IOException, InterruptedException {
-        Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), now);
-        taskManager.addTask(task);
-        int taskCount = taskManager.getAllTask().size();
 
-        URI uri = new URI("http://localhost:8080/tasks/0");
+    @Test
+    public void removeSubTasks() throws URISyntaxException, IOException, InterruptedException {
+        Epic epic = new Epic("Эпик 0", TaskStatus.NEW, now);
+        taskManager.addEpic(epic);
+
+        SubTask task = new SubTask("Таск 1", TaskStatus.NEW, Duration.ofMinutes(30), now, 0);
+        taskManager.addSubTask(task);
+        int taskCount = taskManager.getAllSubTask().size();
+
+        URI uri = new URI("http://localhost:8080/subtasks/1");
         HttpRequest request = HttpRequest.newBuilder().uri(uri).DELETE().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertEquals(200, response.statusCode());
-        assertNotEquals(taskCount, taskManager.getAllTask().size());
+        assertNotEquals(taskCount, taskManager.getAllSubTask().size());
     }
 
     @Test
     public void getTask() throws URISyntaxException, IOException, InterruptedException {
-        Task task = new Task("Таск 0", TaskStatus.NEW, Duration.ofMinutes(30), now);
-        taskManager.addTask(task);
+        Epic epic = new Epic("Эпик 0", TaskStatus.NEW, now);
+        taskManager.addEpic(epic);
 
-        URI uri = new URI("http://localhost:8080/tasks/0");
+        SubTask task = new SubTask("Таск 1", TaskStatus.NEW, Duration.ofMinutes(30), now, 0);
+        taskManager.addSubTask(task);
+
+        URI uri = new URI("http://localhost:8080/subtasks/1");
         HttpRequest request = HttpRequest.newBuilder().uri(uri).GET().build();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -99,5 +112,10 @@ public class HttpTaskManagerTaskTest {
 
         assertEquals(task.getName(), jsonObject.get("name").getAsString());
         assertEquals(task.getStartTime().format(Task.FORMATTER), jsonObject.get("startTime").getAsString());
+
+        uri = new URI("http://localhost:8080/subtasks/2");
+        request = HttpRequest.newBuilder().uri(uri).GET().build();
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        assertEquals(404, response.statusCode());
     }
 }

@@ -25,17 +25,15 @@ public class PrioritizedTaskHandler implements HttpHandler {
 
     public void handle(HttpExchange exchange) {
         GetEndpoints endpoint = GetEndpoints.endpointFromPatch(exchange.getRequestURI().getPath());
-        System.out.println(endpoint);
 
         switch (endpoint) {
-            case GET_HISTORY -> getPrioritized(exchange);
+            case GET_PRIORITIZED_TASKS -> getPrioritized(exchange);
             default -> ResponseWriter.writeResponse(exchange, null, 404);
         }
     }
 
 
     private void getPrioritized(HttpExchange exchange) {
-        System.out.println(taskManager.getPrioritizedTasks());
         String json = gson.toJson(taskManager.getPrioritizedTasks());
         ResponseWriter.writeResponse(exchange, json, 200);
     }

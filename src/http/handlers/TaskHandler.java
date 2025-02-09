@@ -85,8 +85,12 @@ public class TaskHandler implements HttpHandler {
                 } else {
                     task = new Task(name, status);
                 }
-                taskManager.addTask(task);
-                ResponseWriter.writeResponse(exchange, null, 201);
+                boolean added = taskManager.addTask(task);
+                if (added) {
+                    ResponseWriter.writeResponse(exchange, null, 201);
+                } else {
+                    ResponseWriter.writeResponse(exchange, null, 406);
+                }
             }
 
         } catch (Exception e) {

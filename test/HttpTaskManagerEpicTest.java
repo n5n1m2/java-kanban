@@ -90,6 +90,11 @@ public class HttpTaskManagerEpicTest {
 
         assertEquals(epic.getName(), jsonObject.get("name").getAsString());
         assertEquals(epic.getStartTime().format(Task.FORMATTER), jsonObject.get("startTime").getAsString());
+
+        uri = new URI("http://localhost:8080/epics/2");
+        request = HttpRequest.newBuilder().uri(uri).GET().build();
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        assertEquals(404, response.statusCode());
     }
 
     @Test
@@ -111,5 +116,9 @@ public class HttpTaskManagerEpicTest {
         assertEquals(subTask.getName(), jsonObject.get("name").getAsString());
         assertEquals(subTask.getStartTime().format(Task.FORMATTER), jsonObject.get("startTime").getAsString());
 
+        uri = new URI("http://localhost:8080/epics/2/subtasks");
+        request = HttpRequest.newBuilder().uri(uri).GET().build();
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        assertEquals(404, response.statusCode());
     }
 }

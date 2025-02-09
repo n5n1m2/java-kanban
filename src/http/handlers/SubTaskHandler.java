@@ -87,8 +87,12 @@ public class SubTaskHandler implements HttpHandler {
                 } else {
                     task = new SubTask(name, status, epicId);
                 }
-                taskManager.addSubTask(task);
-                ResponseWriter.writeResponse(exchange, null, 201);
+                boolean added = taskManager.addSubTask(task);
+                if (added) {
+                    ResponseWriter.writeResponse(exchange, null, 201);
+                } else {
+                    ResponseWriter.writeResponse(exchange, null, 406);
+                }
             }
 
         } catch (Exception e) {
