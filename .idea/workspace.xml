@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Fix tests">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/SubTaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/SubTaskHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/TaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/TaskHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/FileBackedTaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/InMemoryTaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TaskManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/manager/TimeGrid.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/FileBackedTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manager/TimeGrid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manager/TimeGrid.java" afterDir="false" />
-    </list>
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Fix tests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -427,7 +408,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739020568019</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Fix tests">
+      <option name="closed" value="true" />
+      <created>1739088841982</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1739088841982</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
