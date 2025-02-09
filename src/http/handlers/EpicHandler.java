@@ -45,7 +45,6 @@ public class EpicHandler implements HttpHandler {
             default -> endpoint = GetEndpoints.UNKNOWN;
         }
 
-        System.out.println(endpoint + " " + method);
         switch (endpoint) {
             case PostEndpoints.ADD_EPIC -> addEpic(exchange);
             case DeleteEndpoints.DELETE_EPIC_BY_ID -> deleteEpic(exchange);
@@ -66,7 +65,7 @@ public class EpicHandler implements HttpHandler {
             String name = jsonObject.get("name").getAsString();
             TaskStatus status = TaskStatus.valueOf(jsonObject.get("status").getAsString());
             LocalDateTime startTime = jsonObject.has("startTime") ? LocalDateTime.parse(jsonObject.get("startTime").getAsString(), Task.FORMATTER) : null;
-            if (jsonObject.has("id")) {
+            if (jsonObject.has("id") && id != -1) {
                 Epic task;
                 if (startTime != null) {
                     task = new Epic(id, name, status, startTime);

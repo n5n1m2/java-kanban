@@ -43,7 +43,6 @@ public class TaskHandler implements HttpHandler {
             default -> endpoint = GetEndpoints.UNKNOWN;
         }
 
-        System.out.println(endpoint + " " + method);
         switch (endpoint) {
             case PostEndpoints.ADD_TASK -> addTask(exchange);
             case DeleteEndpoints.DELETE_TASK_BY_ID -> deleteTask(exchange);
@@ -66,7 +65,7 @@ public class TaskHandler implements HttpHandler {
                     .plusHours(Long.parseLong(durationParts[1]))
                     .plusMinutes(Long.parseLong(durationParts[2]));
             LocalDateTime startTime = jsonObject.has("startTime") ? LocalDateTime.parse(jsonObject.get("startTime").getAsString(), Task.FORMATTER) : null;
-            if (jsonObject.has("id")) {
+            if (jsonObject.has("id") && id != -1) {
                 Task task;
                 if (startTime != null) {
                     task = new Task(id, name, status, duration, startTime);

@@ -4,7 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Fix tests" />
+    <list default="true" id="a33c4d2a-dae1-4d07-815e-58f804ba86ee" name="Changes" comment="Fix tests">
+      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerEpicTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/HttpTaskManagerTaskTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/EpicHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/EpicHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/SubTaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/SubTaskHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/TaskHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/TaskHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/DeleteEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/DeleteEndpoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/GetEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/GetEndpoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/PostEndpoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/handlers/endpoints/PostEndpoints.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-kanban/http/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-kanban/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/HistoryManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/java-kanban/Sprint8EpicStatusTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/java-kanban/Sprint8EpicStatusTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/EpicHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/SubTaskHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/TaskHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/endpoints/DeleteEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/DeleteEndpoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/endpoints/GetEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/GetEndpoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/handlers/endpoints/PostEndpoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/handlers/endpoints/PostEndpoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,8 +38,8 @@
         <option value="JUnit5 Test Class" />
         <option value="Exception" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,33 +88,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.FileBackedTaskManager.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.FileBackedTaskManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.HistoryManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.InMemoryTaskManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ManagersTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.Sprint8EpicStatusTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.Sprint8Tests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TaskManagerTest.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#8 on sprint__9-solution-http-api&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/project/Project/1/java-kanban&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.FileBackedTaskManager.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.FileBackedTaskManagerTest.executor": "Run",
+    "JUnit.HistoryManagerTest.executor": "Run",
+    "JUnit.HttpTaskManagerEpicTest.executor": "Run",
+    "JUnit.HttpTaskManagerTaskTest.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.executor": "Run",
+    "JUnit.ManagersTest.executor": "Run",
+    "JUnit.Sprint8EpicStatusTest.executor": "Run",
+    "JUnit.Sprint8Tests.executor": "Run",
+    "JUnit.TaskManagerTest.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "#8 on sprint__9-solution-http-api",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/project/Project/1/java-kanban",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -121,8 +145,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="HttpTaskManagerTaskTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HttpTaskManagerTaskTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.HttpTaskManagerTaskTest" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -416,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739088841982</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Fix tests">
+      <option name="closed" value="true" />
+      <created>1739088867568</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1739088867568</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

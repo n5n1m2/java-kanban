@@ -44,7 +44,6 @@ public class SubTaskHandler implements HttpHandler {
             default -> endpoint = GetEndpoints.UNKNOWN;
         }
 
-        System.out.println(endpoint + " " + method);
         switch (endpoint) {
             case PostEndpoints.ADD_SUBTASK -> addSubTask(exchange);
             case DeleteEndpoints.DELETE_SUBTASK_BY_ID -> deleteSubTask(exchange);
@@ -68,7 +67,7 @@ public class SubTaskHandler implements HttpHandler {
                     .plusMinutes(Long.parseLong(durationParts[2]));
             LocalDateTime startTime = jsonObject.has("startTime") ? LocalDateTime.parse(jsonObject.get("startTime").getAsString(), Task.FORMATTER) : null;
             int epicId = jsonObject.get("epicId").getAsInt();
-            if (jsonObject.has("id")) {
+            if (jsonObject.has("id") && id != -1) {
                 SubTask task;
                 if (startTime != null) {
                     task = new SubTask(id, name, status, duration, startTime, epicId);
