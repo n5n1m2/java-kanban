@@ -45,6 +45,17 @@ public class Task {
         this.endTime = this.startTime.plus(duration);
     }
 
+    public Task(String name, TaskStatus status) {
+        this.name = name;
+        this.status = status;
+    }
+
+    public Task(int id, String name, TaskStatus status) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+    }
+
     public static Comparator<Task> compareByStartTime() {
         return (task1, task2) -> task1.getStartTime().compareTo(task2.getStartTime());
     }

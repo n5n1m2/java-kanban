@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.TreeSet;
 
 public interface TaskManager {
-    void addTask(Task task);
+    boolean addTask(Task task);
 
     void addEpic(Epic epic);
 
-    void addSubTask(SubTask subTask);
+    boolean addSubTask(SubTask subTask);
 
     ArrayList<Task> getAllTask();
 
@@ -39,11 +39,11 @@ public interface TaskManager {
 
     SubTask getSubtaskById(int subTaskId);
 
-    void taskUpdate(Task task);
+    boolean taskUpdate(Task task);
 
-    void epicUpdate(Epic epic);
+    boolean epicUpdate(Epic epic);
 
-    void subTaskUpdate(SubTask subTask);
+    boolean subTaskUpdate(SubTask subTask);
 
     List<SubTask> getEpicSubTask(int epicId);
 

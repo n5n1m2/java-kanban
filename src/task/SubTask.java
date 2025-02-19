@@ -23,20 +23,40 @@ public class SubTask extends Epic {
         this.endTime = this.startTime.plus(duration);
     }
 
+    public SubTask(String name, TaskStatus status, int epicId) {
+        super(name, status);
+        this.epicId = epicId;
+    }
+
+    public SubTask(int id, String name, TaskStatus status, int epicId) {
+        super(id, name, status);
+        this.epicId = epicId;
+    }
+
     public int getEpicId() {
         return epicId;
     }
 
     @Override
     public String toString() {
-        return String.format("%d,%S,%s,%s,%s,%s,%d",
-                id,
-                taskType,
-                name,
-                status,
-                (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
-                startTime.format(FORMATTER),
-                epicId
-        );
+        if (startTime != null) {
+            return String.format("%d,%S,%s,%s,%s,%s,%d",
+                    id,
+                    taskType,
+                    name,
+                    status,
+                    (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
+                    startTime.format(FORMATTER),
+                    epicId);
+        } else {
+            return String.format("%d,%S,%s,%s,%s,%s,%d",
+                    id,
+                    taskType,
+                    name,
+                    status,
+                    (duration.toDays() + ":" + duration.toHoursPart() + ":" + duration.toMinutesPart()),
+                    null,
+                    epicId);
+        }
     }
 }
